@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardView.Dark"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="@dimen/activity_horizontal_margin"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:id="@+id/intimation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_id"
+            style="@style/TextAppearance.AppCompat.Headline.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/intimation_id"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_id"
+            style="@style/TextAppearance.AppCompat.Headline.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/l_id"
+            android:textStyle="bold"
+            tools:text="12345" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_name"
+            android:layout_alignEnd="@+id/l_contact"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/v_name"
+            android:layout_below="@+id/l_id"
+            android:gravity="start|top"
+            android:text="@string/name"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_contact"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_contact"
+            android:layout_alignTop="@+id/v_contact"
+            android:layout_below="@+id/l_name"
+            android:gravity="start|top"
+            android:text="@string/contact"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_address"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_address"
+            android:layout_alignEnd="@+id/l_contact"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/v_address"
+            android:layout_below="@+id/l_contact"
+            android:gravity="start|top"
+            android:text="@string/address"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_name"
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/v_id"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_toEndOf="@id/l_name"
+            android:gravity="end|top"
+            tools:text="@tools:sample/full_names" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_contact"
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/v_name"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_toEndOf="@id/l_contact"
+            android:gravity="end|top"
+            tools:text="@tools:sample/us_phones" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_address"
+            style="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/v_contact"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_toEndOf="@id/l_address"
+            android:gravity="end|top"
+            tools:text="@tools:sample/cities" />
+
+
+        <LinearLayout
+            android:id="@+id/action_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_address"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:weightSum="4">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_edit_30dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_comment_30dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/photos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_camera__30dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_check_30dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

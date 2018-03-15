@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/under_process"
+            android:icon="@drawable/ic_under_process_24dp"
+            android:title="@string/under_process" />
+        <item
+            android:id="@+id/processed"
+            android:icon="@drawable/ic_processed_24dp"
+            android:title="@string/processed" />
+        <item
+            android:id="@+id/pending"
+            android:icon="@drawable/ic_pending_24dp"
+            android:title="@string/pending"
+            android:visible="false" />
+
+    </group>
+
+    <item android:title="@string/inspector_profile">
+        <menu>
+            <item
+                android:id="@+id/view_profile"
+                android:icon="@drawable/ic_profile_24dp"
+                android:title="@string/my_profile"
+                android:visible="false" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_log_out_24dp"
+                android:title="@string/log_out" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/full_cardView_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Headline.White"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/summary" />
+
+            <!--CNIC ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_cnic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cnic"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--marketing agent ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_mkt_agent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/marketing_agent"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- vehicle make Drop-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.agico.smk.carinspectionapp.SMKComponents.MaterialSpinner
+                    android:id="@+id/v_vehicle_make"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/vehicle_make"
+                    android:selectAllOnFocus="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--model ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/model"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--coverage type radio-->
+            <RadioGroup
+                android:id="@+id/RG_coverage_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_coverage_type"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_coverage_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/private_"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_coverage_commercial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/commercial"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            </RadioGroup>
+
+            <!--if commercial private/public radio-->
+            <RadioGroup
+                android:id="@+id/RG_coverage_comm_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_usage_type_if_commercial"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_coverage_comm_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/private_carrier_permit"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_coverage_comm_public"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/public_carrier_permit"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+            </RadioGroup>
+
+            <!--registration number ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_reg_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/registration_number"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--Registration date ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_reg_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/registration_date"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:onClick="showDatePicker"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--Chassis Number ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_chassis_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/chassis_number"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--Engine number ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_engine_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/engine_number"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--color condition radio-->
+            <RadioGroup
+                android:id="@+id/RG_color_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/color_condition"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_color_good"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/good"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_color_fair"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/fair"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/RB_color_faded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/faded"
+                    android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+            </RadioGroup>
+
+            <!--color Drop-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.agico.smk.carinspectionapp.SMKComponents.MaterialSpinner
+                    android:id="@+id/v_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/color"
+                    android:selectAllOnFocus="true" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</merge>

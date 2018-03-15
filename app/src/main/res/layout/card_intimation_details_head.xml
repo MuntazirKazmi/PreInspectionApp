@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_id"
+            style="@style/TextAppearance.AppCompat.Headline.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/intimation_id"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_id"
+            style="@style/TextAppearance.AppCompat.Headline.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/l_id"
+            android:textStyle="bold"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_name"
+            android:layout_alignTop="@+id/v_name"
+            android:layout_below="@+id/l_id"
+            android:gravity="start|center_vertical"
+            android:text="@string/name"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_contact"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_contact"
+            android:layout_alignTop="@+id/v_contact"
+            android:layout_below="@+id/l_name"
+            android:gravity="start|center_vertical"
+            android:text="@string/contact"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/l_address"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_address"
+            android:layout_alignTop="@+id/v_address"
+            android:layout_below="@+id/l_contact"
+            android:gravity="start|center_vertical"
+            android:text="@string/address"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_name"
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/v_id"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_toEndOf="@id/l_name"
+            android:gravity="end|center_vertical"
+            tools:text="@tools:sample/full_names" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_contact"
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/v_name"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_toEndOf="@id/l_contact"
+            android:gravity="end|center_vertical"
+            tools:text="@tools:sample/us_phones" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/v_address"
+            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/v_contact"
+            android:layout_toEndOf="@id/l_address"
+            android:gravity="end|center_vertical"
+            tools:text="@tools:sample/cities" />
+
+    </RelativeLayout>
+</merge>

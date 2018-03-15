@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.agico.smk.carinspectionapp"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+configurations {
+    all*.exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:exifinterface:27.1.0'
+    implementation 'com.android.support:support-v13:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.wdullaer:materialdatetimepicker:3.5.1'
+    implementation 'com.otaliastudios:cameraview:1.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.jsibbold:zoomage:1.1.0'
+    implementation 'com.siclo.ezphotopick:library:1.0.8'
+    //    TEST
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation files('libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
+}
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://dl.bintray.com/siclo/SicloAndroidOSS'
+    }
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?actionBarSize"
+    android:padding="32dp">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:indeterminate="true" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/downloading_data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:drawableTop="@drawable/ic_error"
+        android:onClick="refreshRemarks"
+        android:text="@string/error_try_again"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/nothing_to_show_here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:visibility="gone" />
+
+</FrameLayout>

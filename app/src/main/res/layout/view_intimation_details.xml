@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ScrollingActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="4dp"
+        android:scrollbarThumbVertical="@color/colorAccent">
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e2e2e2"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
+
+            <include layout="@layout/card_intimation_details_head" />
+
+            <include layout="@layout/card_summary" />
+
+            <include layout="@layout/card_accessories" />
+
+            <include layout="@layout/card_market_value" />
+
+            <include layout="@layout/card_general_points" />
+
+            <include layout="@layout/card_miscellaneous" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="OnSaveChanges"
+        android:src="@drawable/ic_save_24dp"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp" />
+
+</android.support.design.widget.CoordinatorLayout>

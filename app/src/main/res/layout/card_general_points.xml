@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/full_cardView_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--SECTION GENERAL POINTS-->
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Headline.White"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/general_points" />
+            <!-- CheckBoxes headlights, rearLights, parkingLights, indicatorLights, bumper-->
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_headLights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/head_lights"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_rearLights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rear_lights"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_parkingLights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parking_lights"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_indicatorLights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/indicator_lights"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_bumper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bumper"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+            <!--dents if any multiline ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_dents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dents_if_any"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!--general condition multiline ET-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_gen_cond"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/general_condition"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</merge>

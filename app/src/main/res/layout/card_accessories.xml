@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/full_cardView_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--SECTION ACCESSORIES-->
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/TextAppearance.AppCompat.Headline.White"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/accessories" />
+            <!--Checkboxes odometer, jack rod, cassette/radio,cd-player,spareWheel,airConditioner-->
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_odometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/odometer"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_jackRod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jack_rod"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_cassette_radio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cassette_radio"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_cd_player"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cd_player"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_spare_wheel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/spare_wheel"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_air_conditioner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/air_conditioner"
+                android:textAppearance="@style/TextAppearance.AppTheme.Option" />
+            <!--other accessories multiline ET -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/v_other_acc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/other_accessories_if_any"
+                    android:inputType="textMultiLine" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</merge>
