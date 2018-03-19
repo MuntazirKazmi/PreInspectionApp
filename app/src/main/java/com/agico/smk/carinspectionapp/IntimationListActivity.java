@@ -13,9 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.agico.smk.carinspectionapp.Adapters.IntimationsAdapter;
-import com.agico.smk.carinspectionapp.SOAP.API_Tasks.API_TASK;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
+import com.agico.smk.carinspectionapp.adapters.IntimationsAdapter;
+import com.agico.smk.carinspectionapp.soap.api_tasks.API_TASK;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
 
 public class IntimationListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,7 +23,6 @@ public class IntimationListActivity extends AppCompatActivity
     public IntimationsAdapter recycler_adapter;
     public API_TASK.FinalSubmit finalSubmit;
     public API_TASK.RefreshIntimations refreshTask;
-    RecyclerView recycler_intimations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class IntimationListActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.under_process);
         recycler_adapter = new IntimationsAdapter(this);
-        recycler_intimations = findViewById(R.id.recycler_intimations);
+        RecyclerView recycler_intimations = findViewById(R.id.recycler_intimations);
         recycler_intimations.setHasFixedSize(true);
         recycler_intimations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycler_intimations.setAdapter(recycler_adapter);
@@ -98,8 +97,6 @@ public class IntimationListActivity extends AppCompatActivity
         } else if (id == R.id.pending) {
             recycler_adapter
                     .setStatus(STATUS.Pending);
-        } else if (id == R.id.view_profile) {
-
         } else if (id == R.id.logout) {
             startActivity(new Intent(IntimationListActivity.this, InspectorLoginActivity.class));
             finishAffinity();

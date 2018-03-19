@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SMKComponents;
+package com.agico.smk.carinspectionapp.smk_components;
 
 import android.content.Context;
 import android.support.design.widget.TextInputLayout;
@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /*
@@ -20,10 +19,10 @@ import java.util.Arrays;
  */
 
 public class MaterialSpinner extends AppCompatAutoCompleteTextView implements View.OnTouchListener, AdapterView.OnItemSelectedListener {
-    static final String TAG = MaterialSpinner.class.getName();
-    static String hint = "", errorMessage = "Choose item from list";
-    boolean shouldShowDropDown = true;
-    TextInputLayout parent;
+    private static final String TAG = MaterialSpinner.class.getName();
+    private static String hint = "", errorMessage = "Choose item from list";
+    private boolean shouldShowDropDown = true;
+    private TextInputLayout parent;
     private ArrayList<String> suggestions = new ArrayList<>();
 
     public MaterialSpinner(Context context) {
@@ -36,12 +35,6 @@ public class MaterialSpinner extends AppCompatAutoCompleteTextView implements Vi
 
     public MaterialSpinner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public void setAdapterWithStringArray(String[] stringArray) {
-        if (stringArray.length < 1)
-            Log.e(TAG, "setAdapterWithStringArray: Strings Array can not be empty!");
-        setAdapterWithStringArrayList(new ArrayList<>(Arrays.asList(stringArray)));
     }
 
     public void setAdapterWithStringArrayList(ArrayList<String> strings) {
@@ -109,7 +102,7 @@ public class MaterialSpinner extends AppCompatAutoCompleteTextView implements Vi
         showError(true);
     }
 
-    boolean isErrorShown() {
+    private boolean isErrorShown() {
         return String.valueOf(parent.getHint()).equals(errorMessage);
     }
 

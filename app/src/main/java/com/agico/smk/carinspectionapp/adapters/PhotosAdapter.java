@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.Adapters;
+package com.agico.smk.carinspectionapp.adapters;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import com.agico.smk.carinspectionapp.ImageActivity;
 import com.agico.smk.carinspectionapp.PhotosActivity;
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.RecyclerViewHolders.PhotoView;
-import com.agico.smk.carinspectionapp.RecyclerViewHolders.PlaceHolderView;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
+import com.agico.smk.carinspectionapp.recyclerview_holders.PhotoView;
+import com.agico.smk.carinspectionapp.recyclerview_holders.PlaceHolderView;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 

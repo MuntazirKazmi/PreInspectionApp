@@ -44,7 +44,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="OnSaveChanges"
+        android:onClick="onSaveChanges"
         android:src="@drawable/ic_save_24dp"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp" />

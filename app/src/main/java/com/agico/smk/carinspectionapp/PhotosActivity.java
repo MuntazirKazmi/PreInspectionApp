@@ -13,11 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
 
-import com.agico.smk.carinspectionapp.Adapters.PhotosAdapter;
-import com.agico.smk.carinspectionapp.SOAP.API_Tasks.API_TASK;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
+import com.agico.smk.carinspectionapp.adapters.PhotosAdapter;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.api_tasks.API_TASK;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,8 +32,7 @@ public class PhotosActivity extends AppCompatActivity {
     public PhotosAdapter photosAdapter;
     public API_TASK.GetImages getImages = null;
     public API_TASK.ImageUpload uploadImageTask;
-    RecyclerView photosRecycler;
-    FloatingActionButton add_image;
+    private RecyclerView photosRecycler;
     private String inspection_id;
     private AlertDialog uploadActionDialog;
 
@@ -41,7 +40,7 @@ public class PhotosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
-        add_image = findViewById(R.id.add_image);
+        FloatingActionButton add_image = findViewById(R.id.add_image);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int index = extras.getInt("index");
@@ -54,18 +53,17 @@ public class PhotosActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 EZPhotoPickConfig config = new EZPhotoPickConfig();
-                                switch (which) {
-                                    case 0://Take picture
-                                        config.photoSource = PhotoSource.CAMERA; // or PhotoSource.CAMERA
-                                        config.isAllowMultipleSelect = true;// only for GALLERY pick and API >18
-                                        config.exportingSize = 1024;
-                                        EZPhotoPick.startPhotoPickActivity(PhotosActivity.this, config);
-                                        break;
-                                    case 1:
-                                        config.photoSource = PhotoSource.GALLERY; // or PhotoSource.CAMERA
-                                        config.exportingSize = 1024;
-                                        EZPhotoPick.startPhotoPickActivity(PhotosActivity.this, config);
-                                        break;
+                                if (which == 0) {
+                                    config.photoSource = PhotoSource.CAMERA;
+                                    config.exportingSize = 1024;
+                                    EZPhotoPick.startPhotoPickActivity(PhotosActivity.this, config);
+
+                                } else if (which == 1) {
+                                    config.photoSource = PhotoSource.GALLERY;
+                                    config.isAllowMultipleSelect = false;
+                                    config.exportingSize = 1024;
+                                    EZPhotoPick.startPhotoPickActivity(PhotosActivity.this, config);
+
                                 }
                             }
                         }).create();

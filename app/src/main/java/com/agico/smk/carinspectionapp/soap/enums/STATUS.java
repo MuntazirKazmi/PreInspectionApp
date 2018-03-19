@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP.ENUMS;
+package com.agico.smk.carinspectionapp.soap.enums;
 
 /**
  * Created by Syed Muntazir Mehdi

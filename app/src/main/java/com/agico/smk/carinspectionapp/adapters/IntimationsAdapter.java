@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.Adapters;
+package com.agico.smk.carinspectionapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +15,12 @@ import android.widget.LinearLayout;
 import com.agico.smk.carinspectionapp.IntimationListActivity;
 import com.agico.smk.carinspectionapp.PhotosActivity;
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.RecyclerViewHolders.IntimationView;
 import com.agico.smk.carinspectionapp.RemarksActivity;
-import com.agico.smk.carinspectionapp.SOAP.API_Tasks.API_TASK;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
 import com.agico.smk.carinspectionapp.ScrollingActivity;
+import com.agico.smk.carinspectionapp.recyclerview_holders.IntimationView;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.api_tasks.API_TASK;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
 
 import java.lang.ref.WeakReference;
 
@@ -93,16 +93,15 @@ public class IntimationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (getIntimationsListSize() != 0) {
             final IntimationView holder = (IntimationView) viewHolder;
             holder.setData(Intimations.getInstance().getIntimationAt(position, status));
-            switch (status) {
-                case Under_Process:
-                    holder.setColor(R.color.under_process);
-                    break;
-                case Processed:
-                    holder.setColor(R.color.processed);
-                    break;
-                case Pending:
-                    holder.setColor(R.color.pending);
-                    break;
+            if (status == STATUS.Under_Process) {
+                holder.setColor(R.color.under_process);
+
+            } else if (status == STATUS.Processed) {
+                holder.setColor(R.color.processed);
+
+            } else if (status == STATUS.Pending) {
+                holder.setColor(R.color.pending);
+
             }
             View.OnClickListener editIntimation = new View.OnClickListener() {
                 @Override
@@ -172,7 +171,7 @@ public class IntimationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private int getIntimationsListSize() {
         switch (status) {
             case Under_Process:
-                return Intimations.getInstance().getUnder_process().size();
+                return Intimations.getInstance().getUnderProcess().size();
             case Processed:
                 return Intimations.getInstance().getProcessed().size();
             case Pending:

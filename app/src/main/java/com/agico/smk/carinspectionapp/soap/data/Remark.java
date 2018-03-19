@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP.Data;
+package com.agico.smk.carinspectionapp.soap.data;
 
 /*
  * Created by Syed Muntazir Mehdi

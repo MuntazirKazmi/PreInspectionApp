@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP.Utils;
+package com.agico.smk.carinspectionapp.soap.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,8 +12,8 @@ import java.util.Locale;
 
 public class SOAPUtils {
     public static String getDateFromSoap(String soapDate) {
-        soapDate = soapDate.replaceAll("\\D+", "");
-        java.sql.Date date = new java.sql.Date(Long.parseLong(soapDate));
+        String millis = soapDate.replaceAll("\\D+", "");
+        java.sql.Date date = new java.sql.Date(Long.parseLong(millis));
         return new SimpleDateFormat("dd/MM/yyyy", Locale.US).format(date);
     }
 

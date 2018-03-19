@@ -1,6 +1,6 @@
 package com.agico.smk.carinspectionapp;
 
-import com.agico.smk.carinspectionapp.SOAP.Utils.SOAPUtils;
+import com.agico.smk.carinspectionapp.soap.utils.SOAPUtils;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
+    public void additionIsCorrect() throws Exception {
         assertEquals("07/02/2018", SOAPUtils.getDateFromSoap("1517943600000"));
     }
 }

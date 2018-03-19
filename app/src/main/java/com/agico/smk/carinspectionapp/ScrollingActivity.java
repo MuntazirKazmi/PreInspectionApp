@@ -14,15 +14,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import com.agico.smk.carinspectionapp.SMKComponents.MaterialSpinner;
-import com.agico.smk.carinspectionapp.SOAP.API_Tasks.API_TASK;
-import com.agico.smk.carinspectionapp.SOAP.Colors;
-import com.agico.smk.carinspectionapp.SOAP.Data.Intimation;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
-import com.agico.smk.carinspectionapp.SOAP.Utils.SOAPUtils;
-import com.agico.smk.carinspectionapp.SOAP.Vehicles;
-import com.google.gson.GsonBuilder;
+import com.agico.smk.carinspectionapp.smk_components.MaterialSpinner;
+import com.agico.smk.carinspectionapp.soap.Colors;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.Vehicles;
+import com.agico.smk.carinspectionapp.soap.api_tasks.API_TASK;
+import com.agico.smk.carinspectionapp.soap.data.Intimation;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
+import com.agico.smk.carinspectionapp.soap.utils.SOAPUtils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DateRangeLimiter;
 
@@ -32,14 +31,11 @@ import java.util.Locale;
 
 public class ScrollingActivity extends AppCompatActivity {
 
-    final String TAG = ScrollingActivity.class.getName();
+    private final String TAG = ScrollingActivity.class.getName();
     public API_TASK.UpdateIntimation updateIntimation = null;
-    //Intent Extras
-    Bundle extras;
-    Intimation intimation;
-    FloatingActionButton fab_save;
+    private Intimation intimation;
     //    Intimation Details Head
-    AppCompatTextView id, name, contact, address;
+    private AppCompatTextView id, name, contact, address;
 
     //SUMMARY
     private TextInputEditText cnic, mkt_agent, model, reg_no, reg_date, chassis_no, engine_no;
@@ -71,23 +67,24 @@ public class ScrollingActivity extends AppCompatActivity {
         setContentView(R.layout.view_intimation_details);
 
 //        Get Intent Values
-        fab_save = findViewById(R.id.save);
-        extras = getIntent().getExtras();
+        FloatingActionButton fab_save = findViewById(R.id.save);
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int index = extras.getInt("index");
             STATUS status = (STATUS) extras.getSerializable("status");
             fab_save.setVisibility((status == STATUS.Processed) ? View.GONE : View.VISIBLE);
             intimation = Intimations.getInstance().getIntimationAt(index, status);
-        } else {
-            Log.e(TAG, "46 onCreate: NO EXTRAS PASSED!");
         }
         initViews();
-        initData();
-
+        setInspectionDetailsData();
+        setSummaryData();
+        setAccessoriesAndMarketData();
+        setGeneralPointsData();
+        setMiscellaneousData();
 
     }
 
-    void initViews() {
+    private void initViews() {
 
         //INTIMATION DETAILS
         id = findViewById(R.id.v_id);
@@ -144,14 +141,59 @@ public class ScrollingActivity extends AppCompatActivity {
         RG_parking_condition = findViewById(R.id.RG_parking_condition);
     }
 
-    void initData() {
-        //INSPECTION DETAILS
-        id.setText(intimation.INSPECTION_ID);
-        name.setText(intimation.INSURED);
-        contact.setText(intimation.INSURED_CONTACT);
-        address.setText(intimation.INSURED_ADDRESS);
+    private void setMiscellaneousData() {
 
-        //SUMMARY
+        owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
+        owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
+        if ("Y".equals(intimation.OWNER_VEHICLE)) isInsuredOwner.setChecked(true);
+        if (intimation.PARKING_CONDITION != null) {
+            parking_condition = intimation.PARKING_CONDITION;
+            switch (intimation.PARKING_CONDITION) {
+                case Intimation.PARKING_GARAGE:
+                    RG_parking_condition.check(R.id.RB_parking_garage);
+                    break;
+                case Intimation.PARKING_OPEN:
+                    RG_parking_condition.check(R.id.RB_parking_open);
+                    break;
+                case Intimation.PARKING_UNCOVERED:
+                    RG_parking_condition.check(R.id.RB_parking_uncovered);
+                    break;
+                default:
+                    Log.e(TAG, "initData: Unspecified Parking Condition");
+            }
+        }
+        if ("Y".equals(intimation.VEHICLE_HIRE)) isUnderPurchase.setChecked(true);
+        if ("Y".equals(intimation.RECONDITIONED)) isReconditioned.setChecked(true);
+        conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
+        last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
+        inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
+    }
+
+    private void setGeneralPointsData() {
+        if ("Y".equals(intimation.HEADLIGHT)) headlights.setChecked(true);
+        if ("Y".equals(intimation.REARLIGHT)) rearLights.setChecked(true);
+        if ("Y".equals(intimation.PARKINGLIGHT)) parkingLights.setChecked(true);
+        if ("Y".equals(intimation.INDICATORLIGHT)) indicatorLights.setChecked(true);
+        if ("Y".equals(intimation.BUMPER)) bumper.setChecked(true);
+        dents.setText((intimation.DENTS != null) ? intimation.DENTS : "");
+        gen_cond.setText((intimation.GENERAL_CONDITION != null) ? intimation.GENERAL_CONDITION : "");
+    }
+
+    private void setAccessoriesAndMarketData() {
+        if ("Y".equals(intimation.ODOMETER)) odometer.setChecked(true);
+        if ("Y".equals(intimation.JACK)) jackrod.setChecked(true);
+        if ("Y".equals(intimation.CASSATE)) cassete_radio.setChecked(true);
+        if ("Y".equals(intimation.CD)) cd_player.setChecked(true);
+        if ("Y".equals(intimation.SPAREWHEEL)) spare_wheel.setChecked(true);
+        if ("Y".equals(intimation.AC)) air_conditioner.setChecked(true);
+        other_acc.setText((intimation.OTHERACCOSSORIES != null) ? intimation.OTHERACCOSSORIES : "");
+
+        v_vcl_mkt_val.setText((intimation.SUM_INSURED != null) ? intimation.SUM_INSURED : "");
+        v_acc_mkt_val.setText((intimation.MARKET_VALUE != null) ? intimation.MARKET_VALUE : "");
+
+    }
+
+    private void setSummaryData() {
         cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
         mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
         vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");
@@ -159,24 +201,22 @@ public class ScrollingActivity extends AppCompatActivity {
         model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
         if (intimation.COVERAG_TYPE != null) {
             coverage_type = intimation.COVERAG_TYPE;
-            switch (intimation.COVERAG_TYPE) {
-                case Intimation.COVERAGE_PRIVATE:
-                    RG_coverage_type.check(R.id.RB_coverage_private);
-                    break;
-                case Intimation.COVERAGE_COMMERCIAL:
-                    RG_coverage_type.check(R.id.RB_coverage_commercial);
-                    break;
+            if (intimation.COVERAG_TYPE.equals(Intimation.COVERAGE_PRIVATE)) {
+                RG_coverage_type.check(R.id.RB_coverage_private);
+
+            } else if (intimation.COVERAG_TYPE.equals(Intimation.COVERAGE_COMMERCIAL)) {
+                RG_coverage_type.check(R.id.RB_coverage_commercial);
+
             }
         }
         if (intimation.PERMIT_TYPE != null) {
             permit_type = intimation.PERMIT_TYPE;
-            switch (intimation.PERMIT_TYPE) {
-                case Intimation.PERMIT_PRIVATE:
-                    RG_permit_type.check(R.id.RB_coverage_comm_private);
-                    break;
-                case Intimation.PERMIT_PUBLIC:
-                    RG_permit_type.check(R.id.RB_coverage_comm_public);
-                    break;
+            if (intimation.PERMIT_TYPE.equals(Intimation.PERMIT_PRIVATE)) {
+                RG_permit_type.check(R.id.RB_coverage_comm_private);
+
+            } else if (intimation.PERMIT_TYPE.equals(Intimation.PERMIT_PUBLIC)) {
+                RG_permit_type.check(R.id.RB_coverage_comm_public);
+
             }
         }
         reg_no.setText((intimation.REGISTRATION_NO != null) ? intimation.REGISTRATION_NO : "");
@@ -195,63 +235,27 @@ public class ScrollingActivity extends AppCompatActivity {
                 case Intimation.COLOR_GOOD:
                     RG_color_condition.check(R.id.RB_color_good);
                     break;
+                default:
+                    Log.e(TAG, "initData: Unspecified Color Condition");
             }
         }
         color.setText((intimation.COLOR != null) ? Colors.getInstance().getNameFor(intimation.COLOR) : "");
         color.setAdapterWithStringArrayList(Colors.getInstance().getNames());
 
-        //ACCESSORIES
-        if (intimation.ODOMETER.equals("Y")) odometer.setChecked(true);
-        if (intimation.JACK.equals("Y")) jackrod.setChecked(true);
-        if (intimation.CASSATE.equals("Y")) cassete_radio.setChecked(true);
-        if (intimation.CD.equals("Y")) cd_player.setChecked(true);
-        if (intimation.SPAREWHEEL.equals("Y")) spare_wheel.setChecked(true);
-        if (intimation.AC.equals("Y")) air_conditioner.setChecked(true);
-        other_acc.setText((intimation.OTHERACCOSSORIES != null) ? intimation.OTHERACCOSSORIES : "");
+    }
 
-        //MARKET VALUE
-        v_vcl_mkt_val.setText((intimation.SUM_INSURED != null) ? intimation.SUM_INSURED : "");
-        v_acc_mkt_val.setText((intimation.MARKET_VALUE != null) ? intimation.MARKET_VALUE : "");
+    private void setInspectionDetailsData() {
+        id.setText(intimation.INSPECTION_ID);
+        name.setText(intimation.INSURED);
+        contact.setText(intimation.INSURED_CONTACT);
+        address.setText(intimation.INSURED_ADDRESS);
 
-        //GENERAL POINTS
-        if (intimation.HEADLIGHT.equals("Y")) headlights.setChecked(true);
-        if (intimation.REARLIGHT.equals("Y")) rearLights.setChecked(true);
-        if (intimation.PARKINGLIGHT.equals("Y")) parkingLights.setChecked(true);
-        if (intimation.INDICATORLIGHT.equals("Y")) indicatorLights.setChecked(true);
-        if (intimation.BUMPER.equals("Y")) bumper.setChecked(true);
-        dents.setText((intimation.DENTS != null) ? intimation.DENTS : "");
-        gen_cond.setText((intimation.GENERAL_CONDITION != null) ? intimation.GENERAL_CONDITION : "");
-
-        //MISCELLANEOUS
-        owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
-        owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
-        if (intimation.OWNER_VEHICLE.equals("Y")) isInsuredOwner.setChecked(true);
-        if (intimation.PARKING_CONDITION != null) {
-            parking_condition = intimation.PARKING_CONDITION;
-            switch (intimation.PARKING_CONDITION) {
-                case Intimation.PARKING_GARAGE:
-                    RG_parking_condition.check(R.id.RB_parking_garage);
-                    break;
-                case Intimation.PARKING_OPEN:
-                    RG_parking_condition.check(R.id.RB_parking_open);
-                    break;
-                case Intimation.PARKING_UNCOVERED:
-                    RG_parking_condition.check(R.id.RB_parking_uncovered);
-                    break;
-            }
-        }
-        if (intimation.VEHICLE_HIRE.equals("Y")) isUnderPurchase.setChecked(true);
-        if (intimation.RECONDITIONED.equals("Y")) isReconditioned.setChecked(true);
-        conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
-        last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
-        inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
     }
 
     public void onRadioButtonClicked(View v) {
         int id = v.getId();
 
         switch (id) {
-            //Summary
             case R.id.RB_coverage_private:
                 coverage_type = Intimation.COVERAGE_PRIVATE;
                 break;
@@ -285,6 +289,8 @@ public class ScrollingActivity extends AppCompatActivity {
             case R.id.RB_parking_uncovered:
                 parking_condition = Intimation.PARKING_UNCOVERED;
                 break;
+            default:
+                Log.d(TAG, "onRadioButtonClicked: Unhandled Radio Button");
         }
     }
 
@@ -338,8 +344,8 @@ public class ScrollingActivity extends AppCompatActivity {
                 if (year < now.get(Calendar.YEAR)) return false;
                 else if (year == now.get(Calendar.YEAR))
                     if (month < now.get(Calendar.MONTH)) return false;
-                    else if (month == now.get(Calendar.MONTH))
-                        if (day <= now.get(Calendar.DAY_OF_MONTH)) return false;
+                    else if (month == now.get(Calendar.MONTH)
+                            && day <= now.get(Calendar.DAY_OF_MONTH)) return false;
                 return true;
             }
 
@@ -356,12 +362,12 @@ public class ScrollingActivity extends AppCompatActivity {
 
             @Override
             public void writeToParcel(Parcel parcel, int i) {
-
+                //Empty Function. Override mandatory by library
             }
         });
     }
 
-    public void OnSaveChanges(View v) {
+    public void onSaveChanges(View v) {
         if (updateIntimation == null) {
             if (!Colors.getInstance().isValidColorName(color.getText().toString())) {
                 color.showError(true);
@@ -420,9 +426,6 @@ public class ScrollingActivity extends AppCompatActivity {
             intimation.INSPECTION_PLACE = (!(inspection_loc.getText().toString().trim().isEmpty()) ? inspection_loc.getText().toString().trim() : null);
             intimation.PARKING_CONDITION = (!parking_condition.isEmpty()) ? parking_condition : null;
 
-            String json = new GsonBuilder().serializeNulls().create().toJson(intimation);
-            Log.d(TAG, "Saved: " + json);
-
             updateIntimation = new API_TASK.UpdateIntimation(intimation, ScrollingActivity.this);
             updateIntimation.execute();
             Snackbar.make(headlights, "Please wait while record updates", Snackbar.LENGTH_SHORT);
@@ -433,6 +436,8 @@ public class ScrollingActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (updateIntimation == null) {
             super.onBackPressed();
+        } else {
+            Snackbar.make(headlights, "Please wait while record updates", Snackbar.LENGTH_SHORT);
         }
     }
 }

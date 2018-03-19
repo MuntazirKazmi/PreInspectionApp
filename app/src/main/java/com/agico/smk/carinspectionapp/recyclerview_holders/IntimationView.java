@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.RecyclerViewHolders;
+package com.agico.smk.carinspectionapp.recyclerview_holders;
 
 import android.support.annotation.ColorRes;
 import android.support.v7.widget.AppCompatTextView;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.SOAP.Data.Intimation;
+import com.agico.smk.carinspectionapp.soap.data.Intimation;
 
 /*
  * Created by AGICO on 1/30/2018.

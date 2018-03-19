@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP;
+package com.agico.smk.carinspectionapp.soap;
 
 
 import org.ksoap2.SoapEnvelope;
@@ -43,7 +43,7 @@ public class SOAPClient {
         return response.toString();
     }
 
-    public static String get_request(String getAction) {
+    public static String getRequest(String getAction) {
         if (getAction.equals(GET_COLORS)
                 || getAction.equals(GET_VEHICLE_LIST)) {
             SoapObject request = new SoapObject(NAMESPACE, getAction);

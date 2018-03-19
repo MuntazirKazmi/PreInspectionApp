@@ -18,10 +18,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.agico.smk.carinspectionapp.SOAP.Colors;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
-import com.agico.smk.carinspectionapp.SOAP.SOAPClient;
-import com.agico.smk.carinspectionapp.SOAP.Vehicles;
+import com.agico.smk.carinspectionapp.soap.Colors;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.SOAPClient;
+import com.agico.smk.carinspectionapp.soap.Vehicles;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -175,11 +175,11 @@ public class InspectorLoginActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(s);
                 Intimations.getInstance().setIntimations(jsonArray);
 
-                s = SOAPClient.get_request(SOAPClient.GET_COLORS);
+                s = SOAPClient.getRequest(SOAPClient.GET_COLORS);
                 jsonArray = new JSONArray(s);
                 Colors.getInstance().setColors(jsonArray);
 
-                s = SOAPClient.get_request(SOAPClient.GET_VEHICLE_LIST);
+                s = SOAPClient.getRequest(SOAPClient.GET_VEHICLE_LIST);
                 jsonArray = new JSONArray(s);
                 Vehicles.getInstance().setVehicles(jsonArray);
 

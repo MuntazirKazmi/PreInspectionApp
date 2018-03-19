@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP.API_Tasks;
+package com.agico.smk.carinspectionapp.soap.api_tasks;
 
 
 import android.app.AlertDialog;
@@ -7,16 +7,15 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.agico.smk.carinspectionapp.CameraActivity;
 import com.agico.smk.carinspectionapp.IntimationListActivity;
 import com.agico.smk.carinspectionapp.PhotosActivity;
 import com.agico.smk.carinspectionapp.RemarksActivity;
-import com.agico.smk.carinspectionapp.SOAP.Data.Intimation;
-import com.agico.smk.carinspectionapp.SOAP.Data.Remark;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
-import com.agico.smk.carinspectionapp.SOAP.SOAPClient;
 import com.agico.smk.carinspectionapp.ScrollingActivity;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.SOAPClient;
+import com.agico.smk.carinspectionapp.soap.data.Intimation;
+import com.agico.smk.carinspectionapp.soap.data.Remark;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -55,7 +54,7 @@ public class API_TASK {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             RemarksActivity remarksActivity = remarksActivityWeakReference.get();
-            if (s.equals("Remarks Saved!")) {
+            if ("Remarks Saved!".equals(s)) {
                 new AlertDialog.Builder(remarksActivity).setTitle("SUCCESS").setMessage("Remarks have been added!").setPositiveButton("OK", null).create().show();
                 remarksActivity.refreshRemarks(null);
             } else {
@@ -84,7 +83,7 @@ public class API_TASK {
             super.onPostExecute(s);
             Log.d("", "onPostExecute() returned: " + s);
             RemarksActivity remarksActivity = remarksActivityWeakReference.get();
-            if (s.equals("No Record Found!")) {
+            if ("No Record Found!".equals(s)) {
                 remarksActivity.remarksAdapter.remarks.clear();
                 remarksActivity.remarksAdapter.updateLoadingStatus(LOADING_STATUS.LOADED_EMPTY);
                 remarksActivity.viewRemarks = null;
@@ -126,7 +125,7 @@ public class API_TASK {
             super.onPostExecute(s);
             final ScrollingActivity scrollingActivity = scrollingActivityWeakReference.get();
             Log.d("999", "onPostExecute() returned: " + s);
-            if (s.equals("True")) {
+            if ("True".equals(s)) {
                 new AlertDialog.Builder(scrollingActivity).setTitle("SUCCESS").setMessage("Intimation has been updated.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -139,46 +138,6 @@ public class API_TASK {
                 new AlertDialog.Builder(scrollingActivity).setTitle("OOPS!!").setMessage("Looks like record is not updated.\n" + s).setPositiveButton("OK", null).create().show();
             }
             scrollingActivity.updateIntimation = null;
-        }
-    }
-
-    public static class UploadImage extends AsyncTask<Void, Void, String> {
-        private String inspection_id;
-        private String base64;
-        private WeakReference<CameraActivity> weakReference;
-
-        public UploadImage(String inspection_id, String base64, CameraActivity cameraActivity) {
-            this.inspection_id = inspection_id;
-            this.base64 = base64;
-            this.weakReference = new WeakReference<>(cameraActivity);
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            return SOAPClient.uploadImage(inspection_id, base64);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            final CameraActivity cameraActivity = weakReference.get();
-            Log.d("333", "onPostExecute() returned: " + s);
-            if (s.equals("Saved")) {
-                new AlertDialog.Builder(cameraActivity).setTitle("SUCCESS").setMessage("Photo has been uploaded!").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        cameraActivity.finish();
-                    }
-                }).create().show();
-            } else {
-                new AlertDialog.Builder(cameraActivity).setTitle("OOPS!!").setMessage("Looks like photo is not uploaded").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        cameraActivity.finish();
-                    }
-                }).create().show();
-            }
-            cameraActivity.uploadImageTask = null;
         }
     }
 
@@ -203,7 +162,7 @@ public class API_TASK {
             super.onPostExecute(s);
             final PhotosActivity cameraActivity = weakReference.get();
             Log.d("333", "onPostExecute() returned: " + s);
-            if (s.equals("Saved")) {
+            if ("Saved".equals(s)) {
                 new AlertDialog.Builder(cameraActivity).setTitle("SUCCESS").setMessage("Photo has been uploaded!").setPositiveButton("OK", null).create().show();
             } else {
                 new AlertDialog.Builder(cameraActivity).setTitle("OOPS!!").setMessage("Looks like photo is not uploaded").setPositiveButton("OK", null).create().show();
@@ -267,9 +226,9 @@ public class API_TASK {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("", "onPostExecute() returned: " + s);
+            Log.d("3232", "onPostExecute() returned: " + s);
             IntimationListActivity intimationListActivity = activityWeakReference.get();
-            if (s.equals("TRUE")) {
+            if ("TRUE".equals(s)) {
                 intimationListActivity.refreshAll();
                 new AlertDialog.Builder(intimationListActivity).setTitle("Success").setMessage("Final Submission Successful").create().show();
             } else

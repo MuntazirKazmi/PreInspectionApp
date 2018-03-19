@@ -1,7 +1,7 @@
-package com.agico.smk.carinspectionapp.SOAP;
+package com.agico.smk.carinspectionapp.soap;
 
-import com.agico.smk.carinspectionapp.SOAP.Data.Intimation;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
+import com.agico.smk.carinspectionapp.soap.data.Intimation;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -36,16 +36,14 @@ public class Intimations {
             for (int i = 0; i < array.length(); i++) {
                 String object = array.getJSONObject(i).toString();
                 Intimation intimation = new Gson().fromJson(object, Intimation.class);
-                switch (intimation.STATUS1) {
-                    case Intimation.STATUS_UNDER_PROCESS:
-                        under_process.add(intimation);
-                        break;
-                    case Intimation.STATUS_PENDING:
-                        pending.add(intimation);
-                        break;
-                    case Intimation.STATUS_PROCESSED:
-                        processed.add(intimation);
-                        break;
+                if (intimation.STATUS1.equals(Intimation.STATUS_UNDER_PROCESS)) {
+                    under_process.add(intimation);
+
+                } else if (intimation.STATUS1.equals(Intimation.STATUS_PENDING)) {
+                    pending.add(intimation);
+
+                } else if (intimation.STATUS1.equals(Intimation.STATUS_PROCESSED)) {
+                    processed.add(intimation);
                 }
             }
 
@@ -54,7 +52,7 @@ public class Intimations {
         }
     }
 
-    public ArrayList<Intimation> getUnder_process() {
+    public ArrayList<Intimation> getUnderProcess() {
         return under_process;
     }
 
@@ -68,7 +66,6 @@ public class Intimations {
 
     public Intimation getIntimationAt(int index, STATUS status) {
         switch (status) {
-
             case Under_Process:
                 return under_process.get(index);
             case Processed:

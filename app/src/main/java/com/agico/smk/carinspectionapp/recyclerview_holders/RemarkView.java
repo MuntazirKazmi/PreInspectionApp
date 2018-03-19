@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.RecyclerViewHolders;
+package com.agico.smk.carinspectionapp.recyclerview_holders;
 
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.text.style.TextAppearanceSpan;
 import android.view.View;
 
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.SOAP.Utils.SOAPUtils;
+import com.agico.smk.carinspectionapp.soap.utils.SOAPUtils;
 
 /**
  * Created by Syed Muntazir Mehdi
@@ -27,23 +27,21 @@ public class RemarkView extends RecyclerView.ViewHolder {
         TextAppearanceSpan subhead = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Headline);
         TextAppearanceSpan medium = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Menu);
         TextAppearanceSpan small = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Small);
-        if (date == null) date = "NIL";
-        else date = SOAPUtils.getDateFromSoap(date);
         SpannableString spannableString = new SpannableString(
                 "Remark ID:" + id + "\n" +
                         remark + "\n\n" +
-                        "- " + date
+                        "- " + ((date == null) ? "NIL" : SOAPUtils.getDateFromSoap(date))
         );
 
-        int start = 0, end = id.length() + 11;
+        int start = 0;
+        int end = id.length() + 11;
         spannableString.setSpan(subhead, start, end, 0);
         start = end;
         end += remark.length() + 2;
         spannableString.setSpan(medium, start, end, 0);
         start = end;
-        end += date.length() + 2;
+        end += ((date == null) ? 3 : date.length()) + 2;
         spannableString.setSpan(small, start, end, 0);
-
         tv_remarks.setText(spannableString);
     }
 }

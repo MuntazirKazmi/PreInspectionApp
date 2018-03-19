@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.SOAP;
+package com.agico.smk.carinspectionapp.soap;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.agico.smk.carinspectionapp.SMKComponents.MaterialSpinner
+                <com.agico.smk.carinspectionapp.smk_components.MaterialSpinner
                     android:id="@+id/v_vehicle_make"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.agico.smk.carinspectionapp.SMKComponents.MaterialSpinner
+                <com.agico.smk.carinspectionapp.smk_components.MaterialSpinner
                     android:id="@+id/v_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

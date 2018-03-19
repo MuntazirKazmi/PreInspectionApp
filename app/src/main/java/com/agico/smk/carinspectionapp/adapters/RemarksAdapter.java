@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.Adapters;
+package com.agico.smk.carinspectionapp.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.RecyclerViewHolders.PlaceHolderView;
-import com.agico.smk.carinspectionapp.RecyclerViewHolders.RemarkView;
-import com.agico.smk.carinspectionapp.SOAP.Data.Remark;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
+import com.agico.smk.carinspectionapp.recyclerview_holders.PlaceHolderView;
+import com.agico.smk.carinspectionapp.recyclerview_holders.RemarkView;
+import com.agico.smk.carinspectionapp.soap.data.Remark;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
 
 import java.util.ArrayList;
 

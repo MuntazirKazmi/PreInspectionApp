@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.RecyclerViewHolders;
+package com.agico.smk.carinspectionapp.recyclerview_holders;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;

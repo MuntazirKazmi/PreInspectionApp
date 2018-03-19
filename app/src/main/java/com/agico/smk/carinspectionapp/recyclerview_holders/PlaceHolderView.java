@@ -1,4 +1,4 @@
-package com.agico.smk.carinspectionapp.RecyclerViewHolders;
+package com.agico.smk.carinspectionapp.recyclerview_holders;
 
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.agico.smk.carinspectionapp.R;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
 
 /**
  * Created by Syed Muntazir Mehdi

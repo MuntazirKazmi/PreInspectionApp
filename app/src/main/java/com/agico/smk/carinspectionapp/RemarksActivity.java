@@ -13,21 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.agico.smk.carinspectionapp.Adapters.RemarksAdapter;
-import com.agico.smk.carinspectionapp.SOAP.API_Tasks.API_TASK;
-import com.agico.smk.carinspectionapp.SOAP.Data.Intimation;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.LOADING_STATUS;
-import com.agico.smk.carinspectionapp.SOAP.ENUMS.STATUS;
-import com.agico.smk.carinspectionapp.SOAP.Intimations;
+import com.agico.smk.carinspectionapp.adapters.RemarksAdapter;
+import com.agico.smk.carinspectionapp.soap.Intimations;
+import com.agico.smk.carinspectionapp.soap.api_tasks.API_TASK;
+import com.agico.smk.carinspectionapp.soap.data.Intimation;
+import com.agico.smk.carinspectionapp.soap.enums.LOADING_STATUS;
+import com.agico.smk.carinspectionapp.soap.enums.STATUS;
 
 public class RemarksActivity extends AppCompatActivity {
-    final String TAG = RemarksActivity.class.getName();
+    private final String TAG = RemarksActivity.class.getName();
     public AlertDialog remarkDialog;
     public RemarksAdapter remarksAdapter;
     public API_TASK.ViewRemarks viewRemarks = null;
     public API_TASK.AddRemarks addRemarks = null;
-    Bundle extras;
-    RecyclerView remarksRecycler;
     //    public AlertDialog.Builder remarkDialogBuilder = null;
     private String inspection_id;
 
@@ -35,7 +33,7 @@ public class RemarksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remarks);
-        extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int index = extras.getInt("index");
             STATUS status = (STATUS) extras.getSerializable("status");
@@ -59,7 +57,7 @@ public class RemarksActivity extends AppCompatActivity {
             Log.e(TAG, " onCreate: NO EXTRAS PASSED!");
         }
 
-        remarksRecycler = findViewById(R.id.remarks_recycler);
+        RecyclerView remarksRecycler = findViewById(R.id.remarks_recycler);
         remarksAdapter = new RemarksAdapter();
         remarksRecycler.setLayoutManager(new LinearLayoutManager(this));
         remarksRecycler.setAdapter(remarksAdapter);
