@@ -77,10 +77,82 @@ public class ScrollingActivity extends AppCompatActivity {
         }
         initViews();
         setInspectionDetailsData();
-        setSummaryData();
         setAccessoriesAndMarketData();
         setGeneralPointsData();
-        setMiscellaneousData();
+        owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
+        owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
+        isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
+        if (intimation.PARKING_CONDITION != null) {
+            parking_condition = intimation.PARKING_CONDITION;
+            switch (parking_condition) {
+                case Intimation.PARKING_GARAGE:
+                    RG_parking_condition.check(R.id.RB_parking_garage);
+
+                    break;
+                case Intimation.PARKING_OPEN:
+                    RG_parking_condition.check(R.id.RB_parking_open);
+
+                    break;
+                case Intimation.PARKING_UNCOVERED:
+                    RG_parking_condition.check(R.id.RB_parking_uncovered);
+
+                    break;
+                default:
+                    Log.e(TAG, "initData: Unspecified Parking Condition");
+
+                    break;
+            }
+        }
+        isUnderPurchase.setChecked("Y".equals(intimation.VEHICLE_HIRE));
+        isReconditioned.setChecked("Y".equals(intimation.RECONDITIONED));
+        conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
+        last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
+        inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
+
+        cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
+        mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
+        vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");
+        vehicle_make.setAdapterWithStringArrayList(Vehicles.getInstance().getNames());
+        model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
+        if (intimation.COVERAG_TYPE != null) {
+            coverage_type = intimation.COVERAG_TYPE;
+            RG_coverage_type.check(
+                    coverage_type.equals(Intimation.COVERAGE_PRIVATE) ?
+                            R.id.RB_coverage_private
+                            : R.id.RB_coverage_commercial
+            );
+        }
+        if (intimation.PERMIT_TYPE != null) {
+            permit_type = intimation.PERMIT_TYPE;
+            RG_permit_type.check(
+                    permit_type.equals(Intimation.PERMIT_PRIVATE) ?
+                            R.id.RB_coverage_comm_private
+                            : R.id.RB_coverage_comm_public
+            );
+        }
+        reg_no.setText((intimation.REGISTRATION_NO != null) ? intimation.REGISTRATION_NO : "");
+        reg_date.setText((intimation.REGISTRATION_DATE != null) ? SOAPUtils.getDateFromSoap(intimation.REGISTRATION_DATE) : "");
+        chassis_no.setText((intimation.CHASSIS != null) ? intimation.CHASSIS : "");
+        engine_no.setText((intimation.ENGINE != null) ? intimation.ENGINE : "");
+        if (intimation.COLOR_CONDITION != null) {
+            color_condition = intimation.COLOR_CONDITION;
+            switch (color_condition) {
+                case Intimation.COLOR_FADED:
+                    RG_color_condition.check(R.id.RB_color_faded);
+                    break;
+                case Intimation.COLOR_FAIR:
+                    RG_color_condition.check(R.id.RB_color_fair);
+                    break;
+                case Intimation.COLOR_GOOD:
+                    RG_color_condition.check(R.id.RB_color_good);
+                    break;
+                default:
+                    Log.e(TAG, "initData: Unspecified Color Condition");
+                    break;
+            }
+        }
+        color.setText((intimation.COLOR != null) ? Colors.getInstance().getNameFor(intimation.COLOR) : "");
+        color.setAdapterWithStringArrayList(Colors.getInstance().getNames());
 
     }
 
@@ -141,34 +213,38 @@ public class ScrollingActivity extends AppCompatActivity {
         RG_parking_condition = findViewById(R.id.RG_parking_condition);
     }
 
-    private void setMiscellaneousData() {
-
-        owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
-        owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
-        isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
-        if (intimation.PARKING_CONDITION != null) {
-            parking_condition = intimation.PARKING_CONDITION;
-            switch (intimation.PARKING_CONDITION) {
-                case Intimation.PARKING_GARAGE:
-                    RG_parking_condition.check(R.id.RB_parking_garage);
-                    break;
-                case Intimation.PARKING_OPEN:
-                    RG_parking_condition.check(R.id.RB_parking_open);
-                    break;
-                case Intimation.PARKING_UNCOVERED:
-                    RG_parking_condition.check(R.id.RB_parking_uncovered);
-                    break;
-                default:
-                    Log.e(TAG, "initData: Unspecified Parking Condition");
-                    break;
-            }
-        }
-        isUnderPurchase.setChecked("Y".equals(intimation.VEHICLE_HIRE));
-        isReconditioned.setChecked("Y".equals(intimation.RECONDITIONED));
-        conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
-        last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
-        inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
-    }
+//    private void setMiscellaneousData() {
+//
+//        owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
+//        owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
+//        isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
+//        if (intimation.PARKING_CONDITION != null) {
+//            parking_condition = intimation.PARKING_CONDITION;
+//            switch (parking_condition) {
+//                case Intimation.PARKING_GARAGE:
+//                    RG_parking_condition.check(R.id.RB_parking_garage);
+//
+//                    break;
+//                case Intimation.PARKING_OPEN:
+//                    RG_parking_condition.check(R.id.RB_parking_open);
+//
+//                    break;
+//                case Intimation.PARKING_UNCOVERED:
+//                    RG_parking_condition.check(R.id.RB_parking_uncovered);
+//
+//                    break;
+//                default:
+//                    Log.e(TAG, "initData: Unspecified Parking Condition");
+//
+//                    break;
+//            }
+//        }
+//        isUnderPurchase.setChecked("Y".equals(intimation.VEHICLE_HIRE));
+//        isReconditioned.setChecked("Y".equals(intimation.RECONDITIONED));
+//        conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
+//        last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
+//        inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
+//    }
 
     private void setGeneralPointsData() {
         headlights.setChecked("Y".equals(intimation.HEADLIGHT));
@@ -194,53 +270,53 @@ public class ScrollingActivity extends AppCompatActivity {
 
     }
 
-    private void setSummaryData() {
-        cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
-        mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
-        vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");
-        vehicle_make.setAdapterWithStringArrayList(Vehicles.getInstance().getNames());
-        model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
-        if (intimation.COVERAG_TYPE != null) {
-            coverage_type = intimation.COVERAG_TYPE;
-            RG_coverage_type.check(
-                    coverage_type.equals(Intimation.COVERAGE_PRIVATE) ?
-                            R.id.RB_coverage_private
-                            : R.id.RB_coverage_commercial
-            );
-        }
-        if (intimation.PERMIT_TYPE != null) {
-            permit_type = intimation.PERMIT_TYPE;
-            RG_permit_type.check(
-                    permit_type.equals(Intimation.PERMIT_PRIVATE) ?
-                            R.id.RB_coverage_comm_private
-                            : R.id.RB_coverage_comm_public
-            );
-        }
-        reg_no.setText((intimation.REGISTRATION_NO != null) ? intimation.REGISTRATION_NO : "");
-        reg_date.setText((intimation.REGISTRATION_DATE != null) ? SOAPUtils.getDateFromSoap(intimation.REGISTRATION_DATE) : "");
-        chassis_no.setText((intimation.CHASSIS != null) ? intimation.CHASSIS : "");
-        engine_no.setText((intimation.ENGINE != null) ? intimation.ENGINE : "");
-        if (intimation.COLOR_CONDITION != null) {
-            color_condition = intimation.COLOR_CONDITION;
-            switch (color_condition) {
-                case Intimation.COLOR_FADED:
-                    RG_color_condition.check(R.id.RB_color_faded);
-                    break;
-                case Intimation.COLOR_FAIR:
-                    RG_color_condition.check(R.id.RB_color_fair);
-                    break;
-                case Intimation.COLOR_GOOD:
-                    RG_color_condition.check(R.id.RB_color_good);
-                    break;
-                default:
-                    Log.e(TAG, "initData: Unspecified Color Condition");
-                    break;
-            }
-        }
-        color.setText((intimation.COLOR != null) ? Colors.getInstance().getNameFor(intimation.COLOR) : "");
-        color.setAdapterWithStringArrayList(Colors.getInstance().getNames());
-
-    }
+//    private void setSummaryData() {
+//        cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
+//        mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
+//        vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");
+//        vehicle_make.setAdapterWithStringArrayList(Vehicles.getInstance().getNames());
+//        model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
+//        if (intimation.COVERAG_TYPE != null) {
+//            coverage_type = intimation.COVERAG_TYPE;
+//            RG_coverage_type.check(
+//                    coverage_type.equals(Intimation.COVERAGE_PRIVATE) ?
+//                            R.id.RB_coverage_private
+//                            : R.id.RB_coverage_commercial
+//            );
+//        }
+//        if (intimation.PERMIT_TYPE != null) {
+//            permit_type = intimation.PERMIT_TYPE;
+//            RG_permit_type.check(
+//                    permit_type.equals(Intimation.PERMIT_PRIVATE) ?
+//                            R.id.RB_coverage_comm_private
+//                            : R.id.RB_coverage_comm_public
+//            );
+//        }
+//        reg_no.setText((intimation.REGISTRATION_NO != null) ? intimation.REGISTRATION_NO : "");
+//        reg_date.setText((intimation.REGISTRATION_DATE != null) ? SOAPUtils.getDateFromSoap(intimation.REGISTRATION_DATE) : "");
+//        chassis_no.setText((intimation.CHASSIS != null) ? intimation.CHASSIS : "");
+//        engine_no.setText((intimation.ENGINE != null) ? intimation.ENGINE : "");
+//        if (intimation.COLOR_CONDITION != null) {
+//            color_condition = intimation.COLOR_CONDITION;
+//            switch (color_condition) {
+//                case Intimation.COLOR_FADED:
+//                    RG_color_condition.check(R.id.RB_color_faded);
+//                    break;
+//                case Intimation.COLOR_FAIR:
+//                    RG_color_condition.check(R.id.RB_color_fair);
+//                    break;
+//                case Intimation.COLOR_GOOD:
+//                    RG_color_condition.check(R.id.RB_color_good);
+//                    break;
+//                default:
+//                    Log.e(TAG, "initData: Unspecified Color Condition");
+//                    break;
+//            }
+//        }
+//        color.setText((intimation.COLOR != null) ? Colors.getInstance().getNameFor(intimation.COLOR) : "");
+//        color.setAdapterWithStringArrayList(Colors.getInstance().getNames());
+//
+//    }
 
     private void setInspectionDetailsData() {
         id.setText(intimation.INSPECTION_ID);
