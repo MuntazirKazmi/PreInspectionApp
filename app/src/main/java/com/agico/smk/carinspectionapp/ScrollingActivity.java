@@ -79,6 +79,7 @@ public class ScrollingActivity extends AppCompatActivity {
         setInspectionDetailsData();
         setAccessoriesAndMarketData();
         setGeneralPointsData();
+        //Miscellaneous Data
         owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
         owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
         isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
@@ -108,7 +109,7 @@ public class ScrollingActivity extends AppCompatActivity {
         conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
         last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
         inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
-
+        //Summary Data
         cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
         mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
         vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");

@@ -124,31 +124,43 @@ public class InspectorLoginActivity extends AppCompatActivity {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        final int formVisibility;
+        final int progressVisibility;
+        int formAlpha;
+        int progressAlpha;
+        if (show) {
+            formVisibility = View.GONE;
+            progressVisibility = View.VISIBLE;
+            formAlpha = 0;
+            progressAlpha = 1;
+        } else {
+            formVisibility = View.VISIBLE;
+            progressVisibility = View.GONE;
+            formAlpha = 1;
+            progressAlpha = 0;
+        }
         AnimatorListenerAdapter formAnimatorListenerAdapter = new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                mLoginFormView.setVisibility(formVisibility);
             }
         };
         AnimatorListenerAdapter progressAnimatorListenerAdapter = new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                mProgressView.setVisibility(progressVisibility);
             }
         };
-        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mLoginFormView.setVisibility(formVisibility);
+        mProgressView.setVisibility(progressVisibility);
         mLoginFormView.animate()
                 .setDuration(shortAnimTime)
-                .alpha(show ? 0 : 1)
+                .alpha(formAlpha)
                 .setListener(formAnimatorListenerAdapter);
         mProgressView.animate()
                 .setDuration(shortAnimTime)
-                .alpha(show ? 1 : 0)
+                .alpha(progressAlpha)
                 .setListener(progressAnimatorListenerAdapter);
     }
 
