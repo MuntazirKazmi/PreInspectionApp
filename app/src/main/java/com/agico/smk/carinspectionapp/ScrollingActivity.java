@@ -145,7 +145,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
         owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
-        if ("Y".equals(intimation.OWNER_VEHICLE)) isInsuredOwner.setChecked(true);
+        isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
         if (intimation.PARKING_CONDITION != null) {
             parking_condition = intimation.PARKING_CONDITION;
             switch (intimation.PARKING_CONDITION) {
@@ -160,32 +160,33 @@ public class ScrollingActivity extends AppCompatActivity {
                     break;
                 default:
                     Log.e(TAG, "initData: Unspecified Parking Condition");
+                    break;
             }
         }
-        if ("Y".equals(intimation.VEHICLE_HIRE)) isUnderPurchase.setChecked(true);
-        if ("Y".equals(intimation.RECONDITIONED)) isReconditioned.setChecked(true);
+        isUnderPurchase.setChecked("Y".equals(intimation.VEHICLE_HIRE));
+        isReconditioned.setChecked("Y".equals(intimation.RECONDITIONED));
         conditioned_detail.setText((intimation.VEHICLE_CONDITION_DETAIL != null) ? intimation.VEHICLE_CONDITION_DETAIL : "");
         last_insured.setText((intimation.LAST_INSURED_WITH != null) ? intimation.LAST_INSURED_WITH : "");
         inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
     }
 
     private void setGeneralPointsData() {
-        if ("Y".equals(intimation.HEADLIGHT)) headlights.setChecked(true);
-        if ("Y".equals(intimation.REARLIGHT)) rearLights.setChecked(true);
-        if ("Y".equals(intimation.PARKINGLIGHT)) parkingLights.setChecked(true);
-        if ("Y".equals(intimation.INDICATORLIGHT)) indicatorLights.setChecked(true);
-        if ("Y".equals(intimation.BUMPER)) bumper.setChecked(true);
+        headlights.setChecked("Y".equals(intimation.HEADLIGHT));
+        rearLights.setChecked("Y".equals(intimation.REARLIGHT));
+        parkingLights.setChecked("Y".equals(intimation.PARKINGLIGHT));
+        indicatorLights.setChecked("Y".equals(intimation.INDICATORLIGHT));
+        bumper.setChecked("Y".equals(intimation.BUMPER));
         dents.setText((intimation.DENTS != null) ? intimation.DENTS : "");
         gen_cond.setText((intimation.GENERAL_CONDITION != null) ? intimation.GENERAL_CONDITION : "");
     }
 
     private void setAccessoriesAndMarketData() {
-        if ("Y".equals(intimation.ODOMETER)) odometer.setChecked(true);
-        if ("Y".equals(intimation.JACK)) jackrod.setChecked(true);
-        if ("Y".equals(intimation.CASSATE)) cassete_radio.setChecked(true);
-        if ("Y".equals(intimation.CD)) cd_player.setChecked(true);
-        if ("Y".equals(intimation.SPAREWHEEL)) spare_wheel.setChecked(true);
-        if ("Y".equals(intimation.AC)) air_conditioner.setChecked(true);
+        odometer.setChecked("Y".equals(intimation.ODOMETER));
+        jackrod.setChecked("Y".equals(intimation.JACK));
+        cassete_radio.setChecked("Y".equals(intimation.CASSATE));
+        cd_player.setChecked("Y".equals(intimation.CD));
+        spare_wheel.setChecked("Y".equals(intimation.SPAREWHEEL));
+        air_conditioner.setChecked("Y".equals(intimation.AC));
         other_acc.setText((intimation.OTHERACCOSSORIES != null) ? intimation.OTHERACCOSSORIES : "");
 
         v_vcl_mkt_val.setText((intimation.SUM_INSURED != null) ? intimation.SUM_INSURED : "");
@@ -201,23 +202,19 @@ public class ScrollingActivity extends AppCompatActivity {
         model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
         if (intimation.COVERAG_TYPE != null) {
             coverage_type = intimation.COVERAG_TYPE;
-            if (intimation.COVERAG_TYPE.equals(Intimation.COVERAGE_PRIVATE)) {
-                RG_coverage_type.check(R.id.RB_coverage_private);
-
-            } else if (intimation.COVERAG_TYPE.equals(Intimation.COVERAGE_COMMERCIAL)) {
-                RG_coverage_type.check(R.id.RB_coverage_commercial);
-
-            }
+            RG_coverage_type.check(
+                    coverage_type.equals(Intimation.COVERAGE_PRIVATE) ?
+                            R.id.RB_coverage_private
+                            : R.id.RB_coverage_commercial
+            );
         }
         if (intimation.PERMIT_TYPE != null) {
             permit_type = intimation.PERMIT_TYPE;
-            if (intimation.PERMIT_TYPE.equals(Intimation.PERMIT_PRIVATE)) {
-                RG_permit_type.check(R.id.RB_coverage_comm_private);
-
-            } else if (intimation.PERMIT_TYPE.equals(Intimation.PERMIT_PUBLIC)) {
-                RG_permit_type.check(R.id.RB_coverage_comm_public);
-
-            }
+            RG_permit_type.check(
+                    permit_type.equals(Intimation.PERMIT_PRIVATE) ?
+                            R.id.RB_coverage_comm_private
+                            : R.id.RB_coverage_comm_public
+            );
         }
         reg_no.setText((intimation.REGISTRATION_NO != null) ? intimation.REGISTRATION_NO : "");
         reg_date.setText((intimation.REGISTRATION_DATE != null) ? SOAPUtils.getDateFromSoap(intimation.REGISTRATION_DATE) : "");
@@ -225,7 +222,7 @@ public class ScrollingActivity extends AppCompatActivity {
         engine_no.setText((intimation.ENGINE != null) ? intimation.ENGINE : "");
         if (intimation.COLOR_CONDITION != null) {
             color_condition = intimation.COLOR_CONDITION;
-            switch (intimation.COLOR_CONDITION) {
+            switch (color_condition) {
                 case Intimation.COLOR_FADED:
                     RG_color_condition.check(R.id.RB_color_faded);
                     break;
@@ -237,6 +234,7 @@ public class ScrollingActivity extends AppCompatActivity {
                     break;
                 default:
                     Log.e(TAG, "initData: Unspecified Color Condition");
+                    break;
             }
         }
         color.setText((intimation.COLOR != null) ? Colors.getInstance().getNameFor(intimation.COLOR) : "");
@@ -291,6 +289,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 break;
             default:
                 Log.d(TAG, "onRadioButtonClicked: Unhandled Radio Button");
+                break;
         }
     }
 
