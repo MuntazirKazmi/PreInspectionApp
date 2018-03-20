@@ -93,7 +93,7 @@ public class RemarksActivity extends AppCompatActivity {
         }
     }
 
-    public void refreshRemarks(View view) {
+    public void refresh(View view) {
         if (viewRemarks == null) {
             remarksAdapter.updateLoadingStatus(LOADING_STATUS.LOADING);
             viewRemarks = new API_TASK.ViewRemarks(this, inspection_id);

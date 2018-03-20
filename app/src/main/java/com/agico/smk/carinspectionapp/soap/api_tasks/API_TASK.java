@@ -56,7 +56,7 @@ public class API_TASK {
             RemarksActivity remarksActivity = remarksActivityWeakReference.get();
             if ("Remarks Saved!".equals(s)) {
                 new AlertDialog.Builder(remarksActivity).setTitle("SUCCESS").setMessage("Remarks have been added!").setPositiveButton("OK", null).create().show();
-                remarksActivity.refreshRemarks(null);
+                remarksActivity.refresh(null);
             } else {
                 new AlertDialog.Builder(remarksActivity).setTitle("OOPS!!").setMessage("Looks like remarks are not added").setPositiveButton("OK", null).create().show();
             }

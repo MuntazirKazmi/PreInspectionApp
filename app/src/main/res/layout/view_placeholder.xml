@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:drawableTop="@drawable/ic_error"
-        android:onClick="refreshRemarks"
+        android:onClick="refresh"
         android:text="@string/error_try_again"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:visibility="gone" />
