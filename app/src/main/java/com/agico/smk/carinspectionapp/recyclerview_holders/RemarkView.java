@@ -27,10 +27,12 @@ public class RemarkView extends RecyclerView.ViewHolder {
         TextAppearanceSpan subhead = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Headline);
         TextAppearanceSpan medium = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Menu);
         TextAppearanceSpan small = new TextAppearanceSpan(tv_remarks.getContext(), android.support.v7.appcompat.R.style.TextAppearance_AppCompat_Small);
+        String sDate;
+        sDate = ((date == null) ? "NIL" : SOAPUtils.getDateFromSoap(date));
         SpannableString spannableString = new SpannableString(
                 "Remark ID:" + id + "\n" +
                         remark + "\n\n" +
-                        "- " + ((date == null) ? "NIL" : SOAPUtils.getDateFromSoap(date))
+                        "- " + sDate
         );
 
         int start = 0;
@@ -40,7 +42,7 @@ public class RemarkView extends RecyclerView.ViewHolder {
         end += remark.length() + 2;
         spannableString.setSpan(medium, start, end, 0);
         start = end;
-        end += ((date == null) ? 3 : date.length()) + 2;
+        end += sDate.length() + 2;
         spannableString.setSpan(small, start, end, 0);
         tv_remarks.setText(spannableString);
     }
