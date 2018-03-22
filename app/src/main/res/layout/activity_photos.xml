@@ -23,8 +23,8 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="onAddImage"
-        android:src="@drawable/ic_add_30dp"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_add_30dp" />
 
 </android.support.design.widget.CoordinatorLayout>

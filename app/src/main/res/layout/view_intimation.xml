@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_edit_30dp" />
+                app:srcCompat="@drawable/ic_edit_30dp" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/remarks"
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_comment_30dp" />
+                app:srcCompat="@drawable/ic_comment_30dp" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/photos"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_camera__30dp" />
+                app:srcCompat="@drawable/ic_camera__30dp" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/submit"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_check_30dp" />
+                app:srcCompat="@drawable/ic_check_30dp" />
         </LinearLayout>
 
     </RelativeLayout>

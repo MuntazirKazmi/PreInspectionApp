@@ -45,8 +45,8 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="onSaveChanges"
-        android:src="@drawable/ic_save_24dp"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_save_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
