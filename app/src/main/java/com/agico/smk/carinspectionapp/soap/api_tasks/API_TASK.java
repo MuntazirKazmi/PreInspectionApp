@@ -38,16 +38,20 @@ public class API_TASK {
         private String inspection_id;
         private String remarks;
         private WeakReference<RemarksActivity> remarksActivityWeakReference;
+        private String surveyorID;
+        private String password;
 
         public AddRemarks(String inspection_id, String remarks, RemarksActivity remarksActivity) {
             this.inspection_id = inspection_id;
             this.remarks = remarks;
+            surveyorID = remarksActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = remarksActivity.getPreferences(MODE_PRIVATE).getString("password", "");
             this.remarksActivityWeakReference = new WeakReference<>(remarksActivity);
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.addRemarks(inspection_id, remarks);
+            return SOAPClient.addRemarks(surveyorID, password, inspection_id, remarks);
         }
 
         @Override
@@ -67,15 +71,19 @@ public class API_TASK {
     public static class ViewRemarks extends AsyncTask<Void, Void, String> {
         private WeakReference<RemarksActivity> remarksActivityWeakReference;
         private String inspection_id;
+        private String surveyorID;
+        private String password;
 
         public ViewRemarks(RemarksActivity remarksActivity, String inspection_id) {
             this.remarksActivityWeakReference = new WeakReference<>(remarksActivity);
             this.inspection_id = inspection_id;
+            surveyorID = remarksActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = remarksActivity.getPreferences(MODE_PRIVATE).getString("password", "");
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.getRemarksFor(inspection_id);
+            return SOAPClient.getRemarksFor(surveyorID, password, inspection_id);
         }
 
         @Override
@@ -109,15 +117,18 @@ public class API_TASK {
     public static class UpdateIntimation extends AsyncTask<Void, Void, String> {
         private String intimationJSON;
         private WeakReference<ScrollingActivity> scrollingActivityWeakReference;
-
+        private String surveyorID;
+        private String password;
         public UpdateIntimation(Intimation intimation, ScrollingActivity scrollingActivity) {
             intimationJSON = new GsonBuilder().serializeNulls().create().toJson(intimation);
+            surveyorID = scrollingActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = scrollingActivity.getPreferences(MODE_PRIVATE).getString("password", "");
             this.scrollingActivityWeakReference = new WeakReference<>(scrollingActivity);
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.updateInspection(intimationJSON);
+            return SOAPClient.updateInspection(surveyorID, password, intimationJSON);
         }
 
         @Override
@@ -144,17 +155,21 @@ public class API_TASK {
     public static class ImageUpload extends AsyncTask<Void, Void, String> {
         private String inspection_id;
         private String base64;
+        private String surveyorID;
+        private String password;
         private WeakReference<PhotosActivity> weakReference;
 
         public ImageUpload(String inspection_id, String base64, PhotosActivity cameraActivity) {
             this.inspection_id = inspection_id;
             this.base64 = base64;
+            surveyorID = cameraActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = cameraActivity.getPreferences(MODE_PRIVATE).getString("password", "");
             this.weakReference = new WeakReference<>(cameraActivity);
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.uploadImage(inspection_id, base64);
+            return SOAPClient.uploadImage(surveyorID, password, inspection_id, base64);
         }
 
         @Override
@@ -175,15 +190,19 @@ public class API_TASK {
     public static class GetImages extends AsyncTask<Void, Void, String> {
         private WeakReference<PhotosActivity> photosActivityWeakReference;
         private String inspection_id;
+        private String surveyorID;
+        private String password;
 
         public GetImages(PhotosActivity photosActivity, String inspection_id) {
             this.photosActivityWeakReference = new WeakReference<>(photosActivity);
             this.inspection_id = inspection_id;
+            surveyorID = photosActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = photosActivity.getPreferences(MODE_PRIVATE).getString("password", "");
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.getImagesFor(inspection_id);
+            return SOAPClient.getImagesFor(surveyorID, password, inspection_id);
         }
 
         @Override
@@ -212,15 +231,19 @@ public class API_TASK {
     public static class FinalSubmit extends AsyncTask<Void, Void, String> {
         private WeakReference<IntimationListActivity> activityWeakReference;
         private String inspection_id;
+        private String surveyorID;
+        private String password;
 
         public FinalSubmit(IntimationListActivity intimationListActivity, String inspection_id) {
             this.activityWeakReference = new WeakReference<>(intimationListActivity);
             this.inspection_id = inspection_id;
+            surveyorID = intimationListActivity.getPreferences(MODE_PRIVATE).getString("username", "");
+            password = intimationListActivity.getPreferences(MODE_PRIVATE).getString("password", "");
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            return SOAPClient.finalSubmit(inspection_id);
+            return SOAPClient.finalSubmit(surveyorID, password, inspection_id);
         }
 
         @Override
@@ -230,9 +253,9 @@ public class API_TASK {
             IntimationListActivity intimationListActivity = activityWeakReference.get();
             if ("TRUE".equals(s)) {
                 intimationListActivity.refreshAll();
-                new AlertDialog.Builder(intimationListActivity).setTitle("Success").setMessage("Final Submission Successful").create().show();
+                new AlertDialog.Builder(intimationListActivity).setTitle("Success").setMessage("Final Submission Successful").setPositiveButton("OK", null).create().show();
             } else
-                new AlertDialog.Builder(intimationListActivity).setTitle("OOPS").setMessage("Some Error Occurred.\nPlease Try Again.").create().show();
+                new AlertDialog.Builder(intimationListActivity).setTitle("OOPS").setMessage("Some Error Occurred.\nPlease Try Again.").setPositiveButton("OK", null).create().show();
             intimationListActivity.finalSubmit = null;
 
         }
@@ -240,14 +263,14 @@ public class API_TASK {
 
     public static class RefreshIntimations extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+        private final String surveyorID;
+        private final String password;
         private final WeakReference<IntimationListActivity> activityWeakReference;
 
         public RefreshIntimations(IntimationListActivity context) {
-            SharedPreferences myPrefs = context.getSharedPreferences("myPrefs", MODE_PRIVATE);
-            mEmail = myPrefs.getString("username", "");
-            mPassword = myPrefs.getString("password", "");
+            SharedPreferences myPrefs = context.getPreferences(MODE_PRIVATE);
+            surveyorID = myPrefs.getString("username", "");
+            password = myPrefs.getString("password", "");
             activityWeakReference = new WeakReference<>(context);
         }
 
@@ -255,7 +278,7 @@ public class API_TASK {
         protected Boolean doInBackground(Void... params) {
 
             try {
-                String s = SOAPClient.authenticate(mEmail, mPassword);
+                String s = SOAPClient.authenticate(surveyorID, password);
                 JSONArray jsonArray = new JSONArray(s);
                 Intimations.getInstance().setIntimations(jsonArray);
                 return true;

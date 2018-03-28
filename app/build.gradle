@@ -43,9 +43,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/ksoap2-android-assembly-3.6.2-jar-with-dependencies.jar')
 }
-repositories {
-    mavenCentral()
+
+repositories{
     maven {
         url 'https://dl.bintray.com/siclo/SicloAndroidOSS'
     }
 }
+

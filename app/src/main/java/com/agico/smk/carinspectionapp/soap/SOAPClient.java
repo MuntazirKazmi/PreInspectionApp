@@ -15,10 +15,10 @@ import org.ksoap2.transport.HttpTransportSE;
 
 public class SOAPClient {
 
-    public static final String GET_COLORS = "Get_Colors";
-    public static final String GET_VEHICLE_LIST = "Vehicle_list";
     private static final String NAMESPACE = "http://tempuri.org/";
     private static final String SOAP_ADDRESS = "https://askapi.agico.com.pk/inspection.asmx?WSDL";
+    public static final String GET_COLORS = "Get_Colors";
+    public static final String GET_VEHICLE_LIST = "Vehicle_list";
     private static final String AUTHENTICATE = "Authenticate";
     private static final String UPDATE_INSPECTION = "updateinspection";
     private static final String VIEW_REMARKS = "View_Remarks";
@@ -52,45 +52,45 @@ public class SOAPClient {
         return null;
     }
 
-    public static String authenticate(String username, String password) {
+    public static String authenticate(String surveyorID, String password) {
         SoapObject request = new SoapObject(NAMESPACE, AUTHENTICATE);
-        request = setParams(request, new String[]{"SurveyorID", "PASSWORD"}, new String[]{username, password});
+        request = setParams(request, new String[]{"SurveyorID", "PASSWORD"}, new String[]{surveyorID, password});
         return doAction(request, AUTHENTICATE);
     }
 
-    public static String updateInspection(String intimationJSON) {
+    public static String updateInspection(String surveyorID, String password, String intimationJSON) {
         SoapObject request = new SoapObject(NAMESPACE, UPDATE_INSPECTION);
-        request = setParams(request, new String[]{"jsonvalue"}, new String[]{intimationJSON});
+        request = setParams(request, new String[]{"jsonvalue", "SurveyorID", "PASSWORD"}, new String[]{intimationJSON, surveyorID, password});
         return doAction(request, UPDATE_INSPECTION);
     }
 
-    public static String addRemarks(String inspection_id, String remarks) {
+    public static String addRemarks(String surveyorID, String password, String inspection_id, String remarks) {
         SoapObject request = new SoapObject(NAMESPACE, ADD_REMARKS);
-        request = setParams(request, new String[]{"InspectionID", "Remarks"}, new String[]{inspection_id, remarks});
+        request = setParams(request, new String[]{"InspectionID", "Remarks", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, remarks, surveyorID, password});
         return doAction(request, ADD_REMARKS);
     }
 
-    public static String getRemarksFor(String inspection_id) {
+    public static String getRemarksFor(String surveyorID, String password, String inspection_id) {
         SoapObject request = new SoapObject(NAMESPACE, VIEW_REMARKS);
-        request = setParams(request, new String[]{"InspectionID"}, new String[]{inspection_id});
+        request = setParams(request, new String[]{"InspectionID", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, surveyorID, password});
         return doAction(request, VIEW_REMARKS);
     }
 
-    public static String getImagesFor(String inspection_id) {
+    public static String getImagesFor(String surveyorID, String password, String inspection_id) {
         SoapObject request = new SoapObject(NAMESPACE, GET_IMAGES);
-        request = setParams(request, new String[]{"inspection_id"}, new String[]{inspection_id});
+        request = setParams(request, new String[]{"inspection_id", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, surveyorID, password});
         return doAction(request, GET_IMAGES);
     }
 
-    public static String finalSubmit(String inspection_id) {
+    public static String finalSubmit(String surveyorID, String password, String inspection_id) {
         SoapObject request = new SoapObject(NAMESPACE, FINAL_SUBMIT);
-        request = setParams(request, new String[]{"inspection_id"}, new String[]{inspection_id});
+        request = setParams(request, new String[]{"inspection_id", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, surveyorID, password});
         return doAction(request, FINAL_SUBMIT);
     }
 
-    public static String uploadImage(String inspection_id, String base64Image) {
+    public static String uploadImage(String surveyorID, String password, String inspection_id, String base64Image) {
         SoapObject request = new SoapObject(NAMESPACE, UPLOAD_IMAGE);
-        request = setParams(request, new String[]{"InspectionId", "inspec_img"}, new String[]{inspection_id, base64Image});
+        request = setParams(request, new String[]{"InspectionId", "inspec_img", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, base64Image, surveyorID, password});
         return doAction(request, UPLOAD_IMAGE);
     }
 

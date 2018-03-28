@@ -214,7 +214,7 @@ public class InspectorLoginActivity extends AppCompatActivity {
             loginActivity.showProgress(false);
 
             if (success) {
-                loginActivity.getSharedPreferences("myPrefs", MODE_PRIVATE).edit()
+                loginActivity.getPreferences(MODE_PRIVATE).edit()
                         .putString("username", mEmail).putString("password", mPassword).apply();
                 loginActivity.startActivity(new Intent(loginActivity, IntimationListActivity.class));
             } else {
