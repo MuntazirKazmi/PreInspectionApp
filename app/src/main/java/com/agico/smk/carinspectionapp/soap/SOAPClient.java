@@ -84,7 +84,7 @@ public class SOAPClient {
 
     public static String finalSubmit(String surveyorID, String password, String inspection_id) {
         SoapObject request = new SoapObject(NAMESPACE, FINAL_SUBMIT);
-        request = setParams(request, new String[]{"inspection_id", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, surveyorID, password});
+        request = setParams(request, new String[]{"InspectionID", "SurveyorID", "PASSWORD"}, new String[]{inspection_id, surveyorID, password});
         return doAction(request, FINAL_SUBMIT);
     }
 

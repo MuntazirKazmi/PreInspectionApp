@@ -44,8 +44,8 @@ public class API_TASK {
         public AddRemarks(String inspection_id, String remarks, RemarksActivity remarksActivity) {
             this.inspection_id = inspection_id;
             this.remarks = remarks;
-            surveyorID = remarksActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = remarksActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = remarksActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = remarksActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
             this.remarksActivityWeakReference = new WeakReference<>(remarksActivity);
         }
 
@@ -77,8 +77,8 @@ public class API_TASK {
         public ViewRemarks(RemarksActivity remarksActivity, String inspection_id) {
             this.remarksActivityWeakReference = new WeakReference<>(remarksActivity);
             this.inspection_id = inspection_id;
-            surveyorID = remarksActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = remarksActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = remarksActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = remarksActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
         }
 
         @Override
@@ -89,7 +89,7 @@ public class API_TASK {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("", "onPostExecute() returned: " + s);
+            Log.d("tag", "onPostExecute() returned: " + s);
             RemarksActivity remarksActivity = remarksActivityWeakReference.get();
             if ("No Record Found!".equals(s)) {
                 remarksActivity.remarksAdapter.remarks.clear();
@@ -121,8 +121,8 @@ public class API_TASK {
         private String password;
         public UpdateIntimation(Intimation intimation, ScrollingActivity scrollingActivity) {
             intimationJSON = new GsonBuilder().serializeNulls().create().toJson(intimation);
-            surveyorID = scrollingActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = scrollingActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = scrollingActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = scrollingActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
             this.scrollingActivityWeakReference = new WeakReference<>(scrollingActivity);
         }
 
@@ -162,8 +162,8 @@ public class API_TASK {
         public ImageUpload(String inspection_id, String base64, PhotosActivity cameraActivity) {
             this.inspection_id = inspection_id;
             this.base64 = base64;
-            surveyorID = cameraActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = cameraActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = cameraActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = cameraActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
             this.weakReference = new WeakReference<>(cameraActivity);
         }
 
@@ -196,8 +196,8 @@ public class API_TASK {
         public GetImages(PhotosActivity photosActivity, String inspection_id) {
             this.photosActivityWeakReference = new WeakReference<>(photosActivity);
             this.inspection_id = inspection_id;
-            surveyorID = photosActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = photosActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = photosActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = photosActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
         }
 
         @Override
@@ -237,8 +237,8 @@ public class API_TASK {
         public FinalSubmit(IntimationListActivity intimationListActivity, String inspection_id) {
             this.activityWeakReference = new WeakReference<>(intimationListActivity);
             this.inspection_id = inspection_id;
-            surveyorID = intimationListActivity.getPreferences(MODE_PRIVATE).getString("username", "");
-            password = intimationListActivity.getPreferences(MODE_PRIVATE).getString("password", "");
+            surveyorID = intimationListActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("username", "");
+            password = intimationListActivity.getSharedPreferences("prefs", MODE_PRIVATE).getString("password", "");
         }
 
         @Override
@@ -268,7 +268,7 @@ public class API_TASK {
         private final WeakReference<IntimationListActivity> activityWeakReference;
 
         public RefreshIntimations(IntimationListActivity context) {
-            SharedPreferences myPrefs = context.getPreferences(MODE_PRIVATE);
+            SharedPreferences myPrefs = context.getSharedPreferences("prefs", MODE_PRIVATE);
             surveyorID = myPrefs.getString("username", "");
             password = myPrefs.getString("password", "");
             activityWeakReference = new WeakReference<>(context);

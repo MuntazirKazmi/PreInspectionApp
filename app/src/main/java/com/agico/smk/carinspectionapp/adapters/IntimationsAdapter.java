@@ -1,9 +1,11 @@
 package com.agico.smk.carinspectionapp.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -145,9 +147,21 @@ public class IntimationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     public void onClick(View view) {
                         IntimationListActivity intimationListActivity = activityWeakReference.get();
                         if (intimationListActivity.finalSubmit == null) {
-                            String inspection_id = Intimations.getInstance().getIntimationAt(holder.getAdapterPosition(), status).INSPECTION_ID;
-                            intimationListActivity.finalSubmit = new API_TASK.FinalSubmit(intimationListActivity, inspection_id);
-                            intimationListActivity.finalSubmit.execute();
+                            final String inspection_id = Intimations.getInstance().getIntimationAt(holder.getAdapterPosition(), status).INSPECTION_ID;
+                            new AlertDialog.Builder(intimationListActivity)
+                                    .setTitle("Are You Sure?")
+                                    .setMessage("Do you want to Submit\nIntimation #".concat(inspection_id).concat("?"))
+                                    .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            IntimationListActivity intimationListActivity = activityWeakReference.get();
+                                            intimationListActivity.finalSubmit = new API_TASK.FinalSubmit(intimationListActivity, inspection_id);
+                                            intimationListActivity.finalSubmit.execute();
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", null)
+                                    .create().show();
+
                         } else {
                             Snackbar.make(view, "Please wait for previous task to end.", Snackbar.LENGTH_SHORT).show();
                         }

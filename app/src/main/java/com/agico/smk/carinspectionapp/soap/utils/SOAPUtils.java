@@ -2,7 +2,9 @@ package com.agico.smk.carinspectionapp.soap.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Syed Muntazir Mehdi
@@ -22,6 +24,8 @@ public class SOAPUtils {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         try {
             long millis = format.parse(date).getTime();
+            Calendar utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            utc.setTimeInMillis(millis);
             return String.format(Locale.US, "/Date(%s)/", millis);
         } catch (ParseException e) {
             e.printStackTrace();
