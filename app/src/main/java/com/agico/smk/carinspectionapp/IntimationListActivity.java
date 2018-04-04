@@ -51,7 +51,6 @@ public class IntimationListActivity extends AppCompatActivity
 
     }
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
