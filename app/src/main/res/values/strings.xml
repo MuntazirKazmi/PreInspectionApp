@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Car Inspection App</string>
+    <string name="app_name">ASKIMS Smart Pre-Inspection</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">User ID</string>
@@ -87,6 +87,6 @@
 
     <array name="photo_upload_options">
         <item>Take Picture</item>
-        <item>Upload From Gallery</item>
+        <item>Choose From Gallery</item>
     </array>
 </resources>

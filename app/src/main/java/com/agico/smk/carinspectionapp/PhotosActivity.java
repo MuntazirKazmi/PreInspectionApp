@@ -48,7 +48,7 @@ public class PhotosActivity extends AppCompatActivity {
             add_image.setVisibility((status == STATUS.Processed) ? View.GONE : View.VISIBLE);
             if (status != STATUS.Processed) {
                 uploadActionDialog = new AlertDialog.Builder(this)
-                        .setTitle("Pick Your Action")
+                        .setTitle("Add New Image")
                         .setItems(R.array.photo_upload_options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
