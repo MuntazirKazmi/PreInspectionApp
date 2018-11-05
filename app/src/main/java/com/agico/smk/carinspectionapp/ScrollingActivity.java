@@ -38,14 +38,15 @@ public class ScrollingActivity extends AppCompatActivity {
     private AppCompatTextView id, name, contact, address;
 
     //SUMMARY
-    private TextInputEditText cnic, mkt_agent, model, reg_no, reg_date, chassis_no, engine_no;
+    private TextInputEditText cnic,/* mkt_agent,*/
+            model, reg_no, reg_date, chassis_no, engine_no;
     private RadioGroup RG_coverage_type, RG_permit_type, RG_color_condition;
     private MaterialSpinner vehicle_make, color;
     private String coverage_type = "", permit_type = "", color_condition = "";
 
 
     //ACCESSORIES
-    private TextInputEditText other_acc;
+    private TextInputEditText other_acc, odo_read, horsepower;
     private AppCompatCheckBox odometer, jackrod, cassete_radio, cd_player, spare_wheel, air_conditioner;
 
     //MARKET VALUE
@@ -57,7 +58,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
     //MISCELLANEOUS
     private SwitchCompat isInsuredOwner, isUnderPurchase, isReconditioned;
-    private TextInputEditText owner_name, owner_address, conditioned_detail, last_insured, inspection_loc;
+    private TextInputEditText owner_name, cnic_owner, ntn_owner, owner_address, conditioned_detail, last_insured, inspection_loc;
     private RadioGroup RG_parking_condition;
     private String parking_condition = "";
 
@@ -81,6 +82,8 @@ public class ScrollingActivity extends AppCompatActivity {
         setGeneralPointsData();
         //Miscellaneous Data
         owner_name.setText((intimation.OWNER_NAME != null) ? intimation.OWNER_NAME : "");
+        cnic_owner.setText((intimation.CLIENT_CNIC != null) ? intimation.CLIENT_CNIC : "");
+        ntn_owner.setText((intimation.CLIENT_NTN != null) ? intimation.CLIENT_NTN : "");
         owner_address.setText((intimation.OWNER_ADDRESS != null) ? intimation.OWNER_ADDRESS : "");
         isInsuredOwner.setChecked("Y".equals(intimation.OWNER_VEHICLE));
         if (intimation.PARKING_CONDITION != null) {
@@ -88,19 +91,15 @@ public class ScrollingActivity extends AppCompatActivity {
             switch (parking_condition) {
                 case Intimation.PARKING_GARAGE:
                     RG_parking_condition.check(R.id.RB_parking_garage);
-
                     break;
                 case Intimation.PARKING_OPEN:
                     RG_parking_condition.check(R.id.RB_parking_open);
-
                     break;
                 case Intimation.PARKING_UNCOVERED:
                     RG_parking_condition.check(R.id.RB_parking_uncovered);
-
                     break;
                 default:
                     Log.e(TAG, "initData: Unspecified Parking Condition");
-
                     break;
             }
         }
@@ -111,7 +110,7 @@ public class ScrollingActivity extends AppCompatActivity {
         inspection_loc.setText((intimation.INSPECTION_PLACE != null) ? intimation.INSPECTION_PLACE : "");
         //Summary Data
         cnic.setText((intimation.INSURED_CNIC != null) ? intimation.INSURED_CNIC : "");
-        mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
+//        mkt_agent.setText((intimation.MARKETING_AGENT != null) ? intimation.MARKETING_AGENT : "");
         vehicle_make.setText((intimation.VEHICLE_MAKE_CODE != null) ? Vehicles.getInstance().getNameFor(intimation.VEHICLE_MAKE_CODE) : "");
         vehicle_make.setAdapterWithStringArrayList(Vehicles.getInstance().getNames());
         model.setText((intimation.VEHICLE_MODEL != null) ? intimation.VEHICLE_MODEL : "");
@@ -167,7 +166,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         //SUMMARY
         cnic = findViewById(R.id.v_cnic);
-        mkt_agent = findViewById(R.id.v_mkt_agent);
+//        mkt_agent = findViewById(R.id.v_mkt_agent);
         model = findViewById(R.id.v_model);
         reg_no = findViewById(R.id.v_reg_no);
         reg_date = findViewById(R.id.v_reg_date);
@@ -188,7 +187,8 @@ public class ScrollingActivity extends AppCompatActivity {
         spare_wheel = findViewById(R.id.cb_spare_wheel);
         air_conditioner = findViewById(R.id.cb_air_conditioner);
         other_acc = findViewById(R.id.v_other_acc);
-
+        odo_read = findViewById(R.id.v_odo_read);
+        horsepower = findViewById(R.id.v_horsepower);
         //MARKET VALUE
         v_vcl_mkt_val = findViewById(R.id.v_vcl_mkt_val);
         v_acc_mkt_val = findViewById(R.id.v_acc_mkt_val);
@@ -204,6 +204,8 @@ public class ScrollingActivity extends AppCompatActivity {
 
         //MISCELLANEOUS
         owner_name = findViewById(R.id.v_owner_name);
+        cnic_owner = findViewById(R.id.v_cnic_owner);
+        ntn_owner = findViewById(R.id.v_ntn_owner);
         owner_address = findViewById(R.id.v_owner_address);
         isInsuredOwner = findViewById(R.id.sw_isInsuredOwner);
         isUnderPurchase = findViewById(R.id.sw_isUnderPurchase);
@@ -265,6 +267,8 @@ public class ScrollingActivity extends AppCompatActivity {
         spare_wheel.setChecked("Y".equals(intimation.SPAREWHEEL));
         air_conditioner.setChecked("Y".equals(intimation.AC));
         other_acc.setText((intimation.OTHERACCOSSORIES != null) ? intimation.OTHERACCOSSORIES : "");
+        odo_read.setText((intimation.ODOMETER_READING != null) ? intimation.ODOMETER_READING : "");
+        horsepower.setText((intimation.HORSEPOWER != null) ? intimation.HORSEPOWER : "");
 
         v_vcl_mkt_val.setText((intimation.SUM_INSURED != null) ? intimation.SUM_INSURED : "");
         v_acc_mkt_val.setText((intimation.MARKET_VALUE != null) ? intimation.MARKET_VALUE : "");
@@ -417,11 +421,17 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public boolean isOutOfRange(int year, int month, int day) {
                 Calendar now = Calendar.getInstance();
+//                if (year < now.get(Calendar.YEAR)) return false;
+//                else if (year == now.get(Calendar.YEAR)){
+//                    if (month < now.get(Calendar.MONTH)) return false;
+//                    else if (month == now.get(Calendar.MONTH)
+//                            && day <= now.get(Calendar.DAY_OF_MONTH)) return false;
+//                }
+//                return true;
                 if (year < now.get(Calendar.YEAR)) return false;
-                else if (year == now.get(Calendar.YEAR))
-                    if (month < now.get(Calendar.MONTH)) return false;
-                    else if (month == now.get(Calendar.MONTH)
-                            && day <= now.get(Calendar.DAY_OF_MONTH)) return false;
+                else if (year == now.get(Calendar.YEAR)) {
+                    return month >= now.get(Calendar.MONTH) && (month != now.get(Calendar.MONTH) || day > now.get(Calendar.DAY_OF_MONTH));
+                }
                 return true;
             }
 
@@ -457,7 +467,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
             //SUMMARY
             intimation.INSURED_CNIC = (!(cnic.getText().toString().trim().isEmpty()) ? cnic.getText().toString().trim() : null);
-            intimation.MARKETING_AGENT = (!(mkt_agent.getText().toString().trim().isEmpty()) ? mkt_agent.getText().toString().trim() : null);
+//            intimation.MARKETING_AGENT = (!(mkt_agent.getText().toString().trim().isEmpty()) ? mkt_agent.getText().toString().trim() : null);
             intimation.VEHICLE_MAKE_CODE = Vehicles.getInstance().getCodeFor(vehicle_make.getText().toString());
             intimation.VEHICLE_MODEL = (!(model.getText().toString().trim().isEmpty()) ? model.getText().toString().trim() : null);
             intimation.REGISTRATION_NO = (!(reg_no.getText().toString().trim().isEmpty()) ? reg_no.getText().toString().trim() : null);
@@ -477,6 +487,8 @@ public class ScrollingActivity extends AppCompatActivity {
             intimation.SPAREWHEEL = (spare_wheel.isChecked() ? "Y" : "N");
             intimation.AC = (air_conditioner.isChecked() ? "Y" : "N");
             intimation.OTHERACCOSSORIES = (!(other_acc.getText().toString().trim().isEmpty()) ? other_acc.getText().toString().trim() : null);
+            intimation.ODOMETER_READING = (!(odo_read.getText().toString().trim().isEmpty()) ? odo_read.getText().toString().trim() : null);
+            intimation.HORSEPOWER = (!(horsepower.getText().toString().trim().isEmpty()) ? horsepower.getText().toString().trim() : null);
 
             //MARKET VALUE
             intimation.SUM_INSURED = (!(v_vcl_mkt_val.getText().toString().trim().isEmpty()) ? v_vcl_mkt_val.getText().toString().trim() : null);
@@ -496,6 +508,8 @@ public class ScrollingActivity extends AppCompatActivity {
             intimation.RECONDITIONED = (isReconditioned.isChecked() ? "Y" : "N");
             intimation.VEHICLE_HIRE = (isUnderPurchase.isChecked() ? "Y" : "N");
             intimation.OWNER_NAME = (!(owner_name.getText().toString().trim().isEmpty()) ? owner_name.getText().toString().trim() : null);
+            intimation.CLIENT_CNIC = (!(cnic_owner.getText().toString().trim().isEmpty()) ? cnic_owner.getText().toString().trim() : null);
+            intimation.CLIENT_NTN = (!(ntn_owner.getText().toString().trim().isEmpty()) ? ntn_owner.getText().toString().trim() : null);
             intimation.OWNER_ADDRESS = (!(owner_address.getText().toString().trim().isEmpty()) ? owner_address.getText().toString().trim() : null);
             intimation.VEHICLE_CONDITION_DETAIL = (!(conditioned_detail.getText().toString().trim().isEmpty()) ? conditioned_detail.getText().toString().trim() : null);
             intimation.LAST_INSURED_WITH = (!(last_insured.getText().toString().trim().isEmpty()) ? last_insured.getText().toString().trim() : null);
@@ -503,8 +517,9 @@ public class ScrollingActivity extends AppCompatActivity {
             intimation.PARKING_CONDITION = (!parking_condition.isEmpty()) ? parking_condition : null;
 
             updateIntimation = new API_TASK.UpdateIntimation(intimation, ScrollingActivity.this);
+            Snackbar.make(id, "Please wait while record updates", Snackbar.LENGTH_SHORT);
             updateIntimation.execute();
-            Snackbar.make(headlights, "Please wait while record updates", Snackbar.LENGTH_SHORT);
+
         }
     }
 

@@ -21,7 +21,9 @@
     <string name="address">Address:</string>
     <string name="summary">Summary</string>
     <string name="date_of_inspection">Date of Inspection</string>
-    <string name="cnic">CNIC</string>
+    <string name="cnic">Insured CNIC</string>
+    <string name="cnic_own">Owner CNIC</string>
+    <string name="ntn_own">Owner NTN</string>
     <string name="marketing_agent">Marketing Agent</string>
     <string name="vehicle_make">Vehicle Make</string>
     <string name="model">Model</string>
@@ -64,6 +66,8 @@
     <string name="spare_wheel">Spare Wheel</string>
     <string name="air_conditioner">Air conditioner</string>
     <string name="other_accessories_if_any">Other Accessories If Any</string>
+    <string name="odometer_reading">Odometer Reading</string>
+    <string name="horsepower">Horsepower</string>
     <string name="general_points">General Points</string>
     <string name="head_lights">Head Lights</string>
     <string name="rear_lights">Rear Lights</string>
@@ -84,6 +88,8 @@
     <string name="inspector_profile">Inspector Profile</string>
     <string name="my_profile">My Profile</string>
     <string name="log_out">Log Out</string>
+    <string name="support_address">Support Address:</string>
+    <string name="support_email">askims-pi@agico.com.pk</string>
 
     <array name="photo_upload_options">
         <item>Take Picture</item>

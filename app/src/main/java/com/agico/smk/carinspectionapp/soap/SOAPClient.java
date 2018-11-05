@@ -16,7 +16,7 @@ import org.ksoap2.transport.HttpTransportSE;
 public class SOAPClient {
 
     private static final String NAMESPACE = "http://tempuri.org/";
-    private static final String SOAP_ADDRESS = "https://askapi.agico.com.pk/inspection.asmx?WSDL";
+    private static final String SOAP_ADDRESS = "https://askapi2.agico.com.pk/inspection.asmx?WSDL";
     public static final String GET_COLORS = "Get_Colors";
     public static final String GET_VEHICLE_LIST = "Vehicle_list";
     private static final String AUTHENTICATE = "Authenticate";

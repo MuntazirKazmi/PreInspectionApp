@@ -85,7 +85,7 @@ public class IntimationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             emptymessage.setLayoutParams(params);
             emptymessage.setGravity(Gravity.CENTER);
-            emptymessage.setTextAppearance(parent.getContext(), R.style.TextAppearance_AppCompat_Headline);
+            emptymessage.setTextAppearance(parent.getContext(), R.style.TextAppearance_AppCompat_Headline_Black);
             return new EmptyView(emptymessage);
         }
     }

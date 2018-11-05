@@ -32,6 +32,7 @@ public class Intimation {
 
 
     public String AC;
+    public String AGENT_NO;
     public String APPROVAL_DATE;
     public String APPROVED;
     public String BRANCH;
@@ -39,6 +40,8 @@ public class Intimation {
     public String CASSATE;
     public String CD;
     public String CHASSIS;
+    public String CLIENT_CNIC;
+    public String CLIENT_NTN;
     public String COLOR;
     public String COLOR_CONDITION;
     public String COVERAG_TYPE;
@@ -46,11 +49,13 @@ public class Intimation {
     public String ENGINE;
     public String GENERAL_CONDITION;
     public String HEADLIGHT;
+    public String HORSEPOWER;
     public String INDICATORLIGHT;
+    public String INS_TYPE;
+    public String INSP_DATE;
     public String INSPECTION_DATE;
     public String INSPECTION_ID;
     public String INSPECTION_PLACE;
-    public String INSP_DATE;
     public String INSTIME;
     public String INSURED;
     public String INSURED_ADDRESS;
@@ -59,17 +64,18 @@ public class Intimation {
     public String JACK;
     public String LAST_INSURED_WITH;
     public String MARKED_TO;
-    public String MARKETING_AGENT;
     public String MARKET_VALUE;
+    public String MARKETING_AGENT;
     public String MARKING_DATE;
     public String MEMO_ID;
     public String ODOMETER;
+    public String ODOMETER_READING;
     public String OTHERACCOSSORIES;
     public String OWNER_ADDRESS;
     public String OWNER_NAME;
     public String OWNER_VEHICLE;
-    public String PARKINGLIGHT;
     public String PARKING_CONDITION;
+    public String PARKINGLIGHT;
     public String PERMIT_TYPE;
     public String POLICYNUMBER;
     public String REARLIGHT;
@@ -86,4 +92,5 @@ public class Intimation {
     public String VEHICLE_HIRE;
     public String VEHICLE_MAKE_CODE;
     public String VEHICLE_MODEL;
+
 }

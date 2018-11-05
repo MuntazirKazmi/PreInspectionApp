@@ -38,13 +38,13 @@
             android:gravity="start|center_vertical"
             android:text="@string/name"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.White"
             android:textStyle="bold" />
 
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/l_contact"
-            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            style="@style/TextAppearance.AppCompat.Subhead.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/v_contact"
@@ -57,7 +57,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/l_address"
-            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            style="@style/TextAppearance.AppCompat.Subhead.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/v_address"
@@ -70,7 +70,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/v_name"
-            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            style="@style/TextAppearance.AppCompat.Medium.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -82,7 +82,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/v_contact"
-            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            style="@style/TextAppearance.AppCompat.Medium.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -94,7 +94,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/v_address"
-            style="@style/TextAppearance.AppCompat.Medium.Inverse"
+            style="@style/TextAppearance.AppCompat.Medium.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
